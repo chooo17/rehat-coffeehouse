@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import gsap from 'gsap'
@@ -19,6 +19,7 @@ const navLinks = [
 export function Navbar() {
   const navRef = useRef<HTMLElement>(null)
   const pathname = usePathname()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     const nav = navRef.current
@@ -37,6 +38,7 @@ export function Navbar() {
         <Link href="/" className="font-serif text-brand-light tracking-widest text-lg">
           REHAT <span className="text-xs tracking-widest2 opacity-70">COFFEEHOUSE</span>
         </Link>
+        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(link => (
             <Link
@@ -48,10 +50,31 @@ export function Navbar() {
             </Link>
           ))}
         </div>
-        <Link href="/booking" className="bg-brand-accent text-brand-dark text-xs font-bold tracking-widest uppercase px-4 py-2 hover:bg-brand-light transition-colors">
-          Booking
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/booking" className="bg-brand-accent text-brand-dark text-xs font-bold tracking-widest uppercase px-4 py-2 hover:bg-brand-light transition-colors">
+            Booking
+          </Link>
+          {/* Mobile hamburger */}
+          <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden text-brand-light p-1" aria-label="Toggle menu">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileOpen
+                ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
+            </svg>
+          </button>
+        </div>
       </div>
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="md:hidden bg-brand-dark border-t border-brand-mid/30 py-4 flex flex-col gap-4">
+          {navLinks.map(link => (
+            <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}
+              className={`text-xs tracking-widest uppercase px-2 transition-colors ${pathname === link.href ? 'text-brand-accent' : 'text-brand-light/80 hover:text-brand-accent'}`}>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   )
 }

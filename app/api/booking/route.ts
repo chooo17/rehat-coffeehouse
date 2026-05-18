@@ -5,10 +5,14 @@ import { bookingSchema } from '@/lib/zod/schemas'
 import { bookingEmailHtml, bookingWaText, buildWaUrl } from '@/lib/resend/templates'
 
 const limiter = new RateLimiterMemory({ points: 5, duration: 60 })
+let resend: Resend | null = null
+function getResend(): Resend {
+  if (!resend) resend = new Resend(process.env.RESEND_API_KEY)
+  return resend
+}
 
 export async function POST(req: NextRequest) {
-  const resend = new Resend(process.env.RESEND_API_KEY)
-  const ip = req.headers.get('x-forwarded-for') ?? 'unknown'
+  const ip = (req.headers.get('x-forwarded-for') ?? 'unknown').split(',')[0].trim()
   try {
     await limiter.consume(ip)
   } catch {
@@ -26,12 +30,17 @@ export async function POST(req: NextRequest) {
   }
 
   const data = parsed.data
-  await resend.emails.send({
-    from: 'noreply@rehatcoffeehouse.com',
-    to: process.env.OWNER_EMAIL!,
-    subject: `Booking Baru dari ${data.name}`,
-    html: bookingEmailHtml(data),
-  })
+  try {
+    await getResend().emails.send({
+      from: 'noreply@rehatcoffeehouse.com',
+      to: process.env.OWNER_EMAIL!,
+      subject: `Booking Baru dari ${data.name}`,
+      html: bookingEmailHtml(data),
+    })
+  } catch (err) {
+    console.error('Email send failed:', err)
+    // continue — still redirect to WhatsApp
+  }
 
   const waUrl = buildWaUrl(
     process.env.OWNER_WA_NUMBER!,

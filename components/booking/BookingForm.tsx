@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -8,11 +9,13 @@ import { Input } from '@/components/ui/Input'
 type BookingFormInput = z.input<typeof bookingSchema>
 
 export function BookingForm() {
+  const [serverError, setServerError] = useState<string | null>(null)
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingFormInput, unknown, BookingInput>({
     resolver: zodResolver(bookingSchema),
   })
 
   const onSubmit = async (data: BookingInput) => {
+    setServerError(null)
     const res = await fetch('/api/booking', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -21,6 +24,8 @@ export function BookingForm() {
     if (res.ok) {
       const { waUrl } = await res.json()
       window.location.assign(waUrl)
+    } else {
+      setServerError('Gagal mengirim. Silakan coba lagi atau hubungi kami via WhatsApp.')
     }
   }
 
@@ -36,6 +41,7 @@ export function BookingForm() {
         className="px-8 py-4 bg-brand-accent text-brand-dark text-sm font-bold tracking-widest uppercase hover:bg-brand-mid hover:text-brand-light transition-colors disabled:opacity-50">
         {isSubmitting ? 'Mengirim...' : 'Booking Meja'}
       </button>
+      {serverError && <p className="text-sm text-red-500 text-center">{serverError}</p>}
     </form>
   )
 }

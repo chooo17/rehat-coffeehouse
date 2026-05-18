@@ -2,12 +2,13 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { PreorderForm } from '@/components/preorder/PreorderForm'
 import type { MenuItem } from '@/lib/sanity/types'
+import type { SanityImageSource } from '@sanity/image-url'
 
 global.fetch = jest.fn()
 
 const mockItems: MenuItem[] = [
-  { _id: '1', name: 'Espresso', category: 'coffee', price: 20000, image: null, isAvailable: true },
-  { _id: '2', name: 'Croissant', category: 'food', price: 15000, image: null, isAvailable: true },
+  { _id: '1', name: 'Espresso', category: 'coffee', price: 20000, image: {} as SanityImageSource, isAvailable: true },
+  { _id: '2', name: 'Croissant', category: 'food', price: 15000, image: {} as SanityImageSource, isAvailable: true },
 ]
 
 describe('PreorderForm', () => {

@@ -14,6 +14,7 @@ type PreorderFormInput = z.input<typeof preorderSchema>
 
 export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([])
+  const [serverError, setServerError] = useState<string | null>(null)
 
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<PreorderFormInput, unknown, PreorderInput>({
     resolver: zodResolver(preorderSchema),
@@ -21,6 +22,7 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
   })
 
   const onSubmit = async (data: PreorderInput) => {
+    setServerError(null)
     if (selectedItems.length === 0) {
       setError('items', { message: 'Pilih minimal 1 item' })
       return
@@ -34,6 +36,8 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
     if (res.ok) {
       const { waUrl } = await res.json()
       window.location.assign(waUrl)
+    } else {
+      setServerError('Gagal mengirim. Silakan coba lagi atau hubungi kami via WhatsApp.')
     }
   }
 
@@ -68,6 +72,7 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
         className="px-8 py-4 bg-brand-accent text-brand-dark text-sm font-bold tracking-widest uppercase hover:bg-brand-mid hover:text-brand-light transition-colors disabled:opacity-50">
         {isSubmitting ? 'Mengirim...' : 'Konfirmasi Pre-order via WhatsApp'}
       </button>
+      {serverError && <p className="text-sm text-red-500 text-center">{serverError}</p>}
     </form>
   )
 }
