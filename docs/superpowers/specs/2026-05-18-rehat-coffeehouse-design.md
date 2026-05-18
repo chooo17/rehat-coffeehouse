@@ -80,10 +80,10 @@ Entry point utama website.
 - Submit → API route `/api/booking`:
   1. Kirim email ke owner via Resend
   2. Redirect ke WhatsApp deeplink (pesan pre-filled)
-- Rate limiting sederhana di API route
+- Rate limiting: 5 request/menit per IP (in-memory, via `rate-limiter-flexible`)
 
 ### 6. Pre-order (`/preorder`)
-- Pilih item dari daftar menu (fetched dari Sanity)
+- Pilih item dari daftar menu (fetched dari Sanity), dengan pemilihan jumlah (qty, min 1)
 - Input: Nama, Jam kedatangan, Catatan
 - Submit → API route `/api/preorder`:
   1. Kirim email ke owner via Resend (list pesanan lengkap)
@@ -140,6 +140,14 @@ description: text (required)
 image: image
 validUntil: date
 isActive: boolean
+```
+
+### `aboutPage` (singleton)
+```
+philosophy: text (required)
+story: text (required)
+values: array of { title: string, description: string }
+team: array of { name: string, role: string, photo: image } (opsional)
 ```
 
 ### `siteSettings` (singleton)
@@ -254,4 +262,3 @@ OWNER_WA_NUMBER=
 - Payment gateway / transaksi online
 - Sistem autentikasi pengguna
 - Real-time availability meja
-- CMS untuk konten halaman Tentang Kami (bisa ditambah iterasi berikutnya)
