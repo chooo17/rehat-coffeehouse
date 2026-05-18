@@ -117,10 +117,10 @@ npm install -D jest jest-environment-jsdom @testing-library/react @testing-libra
 const nextJest = require('next/jest')
 const createJestConfig = nextJest({ dir: './' })
 module.exports = createJestConfig({
-  setupFilesAfterFramework: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: { '^@/(.*)$': '<rootDir>/$1' },
-  testPathPattern: '__tests__',
+  testMatch: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx'],
 })
 ```
 
