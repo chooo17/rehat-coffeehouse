@@ -5,4 +5,19 @@ module.exports = createJestConfig({
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: { '^@/(.*)$': '<rootDir>/$1' },
   testMatch: ['**/__tests__/**/*.test.ts', '**/__tests__/**/*.test.tsx'],
+  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
+  projects: [
+    {
+      displayName: 'dom',
+      testEnvironment: 'jest-environment-jsdom',
+      testMatch: ['**/__tests__/**/*.test.tsx'],
+    },
+    {
+      displayName: 'node',
+      testEnvironment: 'node',
+      testMatch: ['**/__tests__/api/**/*.test.ts'],
+      preset: 'ts-jest',
+      moduleNameMapper: { '^@/(.*)$': '<rootDir>/$1' },
+    },
+  ],
 })
