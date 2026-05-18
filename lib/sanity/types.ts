@@ -1,16 +1,18 @@
+import type { SanityImageSource } from '@sanity/image-url'
+
 export interface MenuItem {
   _id: string
   name: string
   category: 'coffee' | 'non-coffee' | 'food' | 'snack'
   price: number
   description?: string
-  image: any
+  image: SanityImageSource
   isAvailable: boolean
 }
 
 export interface GalleryPhoto {
   _id: string
-  image: any
+  image: SanityImageSource
   caption?: string
   category?: 'interior' | 'coffee' | 'food' | 'events'
 }
@@ -20,7 +22,7 @@ export interface Event {
   title: string
   date: string
   description?: string
-  image?: any
+  image?: SanityImageSource
   isActive: boolean
 }
 
@@ -28,7 +30,7 @@ export interface Promo {
   _id: string
   title: string
   description: string
-  image?: any
+  image?: SanityImageSource
   validUntil?: string
   isActive: boolean
 }
@@ -37,7 +39,7 @@ export interface AboutPage {
   philosophy: string
   story: string
   values?: { title: string; description: string }[]
-  team?: { name: string; role: string; photo?: any }[]
+  team?: { name: string; role: string; photo?: SanityImageSource }[]
 }
 
 export interface SiteSettings {

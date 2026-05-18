@@ -13,7 +13,7 @@ jest.mock('rate-limiter-flexible', () => ({
   })),
 }))
 
-function makeRequest(body) {
+function makeRequest(body: Record<string, unknown>) {
   return new NextRequest('http://localhost/api/booking', {
     method: 'POST',
     headers: { 'content-type': 'application/json', 'x-forwarded-for': '1.2.3.4' },

@@ -5,9 +5,9 @@ import { bookingSchema } from '@/lib/zod/schemas'
 import { bookingEmailHtml, bookingWaText, buildWaUrl } from '@/lib/resend/templates'
 
 const limiter = new RateLimiterMemory({ points: 5, duration: 60 })
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   const ip = req.headers.get('x-forwarded-for') ?? 'unknown'
   try {
     await limiter.consume(ip)

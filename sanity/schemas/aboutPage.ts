@@ -4,7 +4,6 @@ export const aboutPage = defineType({
   name: 'aboutPage',
   title: 'About Page',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({ name: 'philosophy', type: 'text', validation: R => R.required() }),
     defineField({ name: 'story', type: 'text', validation: R => R.required() }),

@@ -6,7 +6,7 @@ export const bookingSchema = z.object({
   date:   z.string().min(1, 'Tanggal wajib diisi'),
   time:   z.string().min(1, 'Jam wajib diisi'),
   guests: z.number().int().min(1, 'Minimal 1 tamu'),
-  notes:  z.string().optional().default(''),
+  notes:  z.string().default(''),
 })
 
 export const preorderItemSchema = z.object({
@@ -19,7 +19,7 @@ export const preorderItemSchema = z.object({
 export const preorderSchema = z.object({
   name:        z.string().min(1, 'Nama wajib diisi'),
   arrivalTime: z.string().min(1, 'Jam kedatangan wajib diisi'),
-  notes:       z.string().optional().default(''),
+  notes:       z.string().default(''),
   items:       z.array(preorderItemSchema).min(1, 'Pilih minimal 1 item'),
 })
 

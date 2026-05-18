@@ -1,11 +1,14 @@
 'use client'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { bookingSchema, type BookingInput } from '@/lib/zod/schemas'
 import { Input } from '@/components/ui/Input'
 
+type BookingFormInput = z.input<typeof bookingSchema>
+
 export function BookingForm() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingInput>({
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingFormInput, unknown, BookingInput>({
     resolver: zodResolver(bookingSchema),
   })
 

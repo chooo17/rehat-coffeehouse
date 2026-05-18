@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 import { preorderSchema, type PreorderInput } from '@/lib/zod/schemas'
 import { MenuSelector } from './MenuSelector'
 import { Input } from '@/components/ui/Input'
@@ -9,10 +10,12 @@ import type { MenuItem } from '@/lib/sanity/types'
 
 interface SelectedItem { id: string; name: string; qty: number; price: number }
 
+type PreorderFormInput = z.input<typeof preorderSchema>
+
 export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([])
 
-  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<PreorderInput>({
+  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<PreorderFormInput, unknown, PreorderInput>({
     resolver: zodResolver(preorderSchema),
     defaultValues: { items: [] },
   })
