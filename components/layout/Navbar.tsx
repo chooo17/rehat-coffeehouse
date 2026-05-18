@@ -13,6 +13,8 @@ const navLinks = [
   { href: '/tentang', label: 'Tentang' },
   { href: '/galeri', label: 'Galeri' },
   { href: '/events', label: 'Events' },
+  { href: '/booking', label: 'Booking' },
+  { href: '/preorder', label: 'Pre-order' },
   { href: '/kontak', label: 'Kontak' },
 ]
 

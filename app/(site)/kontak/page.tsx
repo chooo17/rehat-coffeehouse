@@ -66,6 +66,23 @@ export default async function KontakPage() {
         ) : (
           <p className="text-center text-brand-mid">Informasi kontak belum tersedia.</p>
         )}
+
+        {/* Google Maps Embed */}
+        <div className="reveal mt-16">
+          <h2 className="font-serif text-brand-dark text-2xl mb-6">Lokasi Kami</h2>
+          <div className="aspect-video w-full overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0!2d107.6!3d-6.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRehat+Coffeehouse!5e0!3m2!1sid!2sid!4v1234567890"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Lokasi Rehat Coffeehouse"
+            />
+          </div>
+        </div>
       </div>
     </ScrollRevealWrapper>
   )
