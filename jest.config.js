@@ -11,6 +11,11 @@ module.exports = createJestConfig({
       displayName: 'dom',
       testEnvironment: 'jest-environment-jsdom',
       testMatch: ['**/__tests__/**/*.test.tsx'],
+      transform: {
+        '^.+\\.tsx?$': ['ts-jest', { tsconfig: { jsx: 'react-jsx', esModuleInterop: true } }],
+      },
+      moduleNameMapper: { '^@/(.*)$': '<rootDir>/$1' },
+      setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
     },
     {
       displayName: 'node',
