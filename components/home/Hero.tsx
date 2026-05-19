@@ -9,10 +9,13 @@ export function Hero() {
   const titleRef   = useRef<HTMLHeadingElement>(null)
   const descRef    = useRef<HTMLParagraphElement>(null)
   const btnsRef    = useRef<HTMLDivElement>(null)
-  const imgRef     = useRef<HTMLDivElement>(null)
+  const block1Ref  = useRef<HTMLDivElement>(null)
+  const block2Ref  = useRef<HTMLDivElement>(null)
+  const block3Ref  = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      /* ── text entrance ─────────────────────────── */
       gsap.fromTo(eyebrowRef.current,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.2 }
@@ -29,10 +32,34 @@ export function Hero() {
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.9 }
       )
-      gsap.fromTo(imgRef.current,
-        { opacity: 0, scale: 0.88, rotation: 3 },
-        { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.7)', delay: 0.5 }
+
+      /* ── block entrance — staggered, each rotates in differently ── */
+      gsap.fromTo(block1Ref.current,
+        { opacity: 0, y: 50, scale: 0.75, rotation: -10 },
+        { opacity: 1, y: 0,  scale: 1,    rotation: 0, duration: 0.7, ease: 'back.out(1.7)', delay: 0.5 }
       )
+      gsap.fromTo(block2Ref.current,
+        { opacity: 0, y: 50, scale: 0.75, rotation: 8 },
+        { opacity: 1, y: 0,  scale: 1,    rotation: 0, duration: 0.7, ease: 'back.out(1.7)', delay: 0.65 }
+      )
+      gsap.fromTo(block3Ref.current,
+        { opacity: 0, y: 50, scale: 0.75, rotation: -6 },
+        { opacity: 1, y: 0,  scale: 1,    rotation: 0, duration: 0.7, ease: 'back.out(1.7)', delay: 0.8 }
+      )
+
+      /* ── continuous float — each block bobs independently ── */
+      gsap.to(block1Ref.current, {
+        y: -10, rotation: -3,
+        duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.3,
+      })
+      gsap.to(block2Ref.current, {
+        y: -14, rotation: 3,
+        duration: 2.9, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.55,
+      })
+      gsap.to(block3Ref.current, {
+        y: -8, rotation: -2,
+        duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.7,
+      })
     })
     return () => ctx.revert()
   }, [])
@@ -73,12 +100,13 @@ export function Hero() {
         </p>
 
         <div ref={btnsRef} className="flex gap-3 items-center flex-wrap opacity-0">
-          <Link
-            href="/menu"
-            className="bg-brand-black text-brand-yellow text-[11px] font-bold tracking-[3px] uppercase px-7 py-3 hover:bg-zinc-800 transition-colors"
+          <a
+            href="#menu"
+            onClick={(e) => { e.preventDefault(); document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' }) }}
+            className="bg-brand-black text-brand-yellow text-[11px] font-bold tracking-[3px] uppercase px-7 py-3 hover:bg-zinc-800 transition-colors cursor-pointer"
           >
             Lihat Menu
-          </Link>
+          </a>
           <Link
             href="/booking"
             className="text-[11px] text-brand-black font-semibold tracking-[2px] uppercase underline underline-offset-4 hover:text-brand-orange transition-colors"
@@ -89,14 +117,14 @@ export function Hero() {
       </div>
 
       {/* Right: image grid */}
-      <div ref={imgRef} className="relative z-10 grid grid-cols-3 gap-3 opacity-0">
-        <div className="rounded-xl bg-brand-black aspect-square flex items-center justify-center p-5">
+      <div className="relative z-10 grid grid-cols-3 gap-3">
+        <div ref={block1Ref} className="rounded-xl bg-brand-black aspect-square flex items-center justify-center p-5 opacity-0">
           <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
         </div>
-        <div className="rounded-xl bg-brand-orange aspect-square flex items-center justify-center p-5">
+        <div ref={block2Ref} className="rounded-xl bg-brand-orange aspect-square flex items-center justify-center p-5 opacity-0">
           <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
         </div>
-        <div className="rounded-xl bg-[#784ba0] aspect-square flex items-center justify-center p-5">
+        <div ref={block3Ref} className="rounded-xl bg-[#784ba0] aspect-square flex items-center justify-center p-5 opacity-0">
           <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
         </div>
       </div>

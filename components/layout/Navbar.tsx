@@ -16,7 +16,7 @@ const navLinks = [
   { id: 'tentang',  label: 'Tentang' },
   { id: 'galeri',   label: 'Galeri' },
   { id: 'events',   label: 'Events' },
-  { id: 'preorder', label: 'Pre-order' },
+  { id: 'preorder', label: 'Pesan' },
   { id: 'kontak',   label: 'Kontak' },
 ]
 
@@ -108,7 +108,7 @@ export function Navbar() {
             href="/booking"
             className="bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-2.5 hover:bg-orange-600 transition-colors"
           >
-            Booking
+            Pesan
           </Link>
 
           {/* Mobile hamburger */}
@@ -147,7 +147,7 @@ export function Navbar() {
             onClick={() => setMobileOpen(false)}
             className="mt-4 text-center bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-3 hover:bg-orange-600 transition-colors"
           >
-            Booking Sekarang
+            Pesan Sekarang
           </Link>
         </div>
       )}
