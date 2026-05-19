@@ -29,7 +29,7 @@ export function MenuSelector({ menuItems, selected, onChange }: Props) {
   const [category, setCategory]   = useState('')
   const [itemId,   setItemId]     = useState('')
 
-  const categories = [...new Set(menuItems.map(i => i.category).filter(Boolean))] as string[]
+  const categories = Array.from(new Set(menuItems.map(i => i.category).filter(Boolean))) as string[]
   const filteredItems = category ? menuItems.filter(i => i.category === category) : []
   const pickedItem    = filteredItems.find(i => i._id === itemId)
 
