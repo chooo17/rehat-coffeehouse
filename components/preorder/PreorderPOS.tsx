@@ -64,16 +64,20 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
 
   const wa = (waNumber || '6287777601617').replace(/\D/g, '')
 
+  function fmtRp(n: number) {
+    return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  }
+
   const waMessage = useMemo(() => {
     if (!name.trim() || cartIsEmpty) return ''
-    const lines = cart.map(i => `- ${i.name} x${i.qty} (Rp ${(i.price * i.qty).toLocaleString('id-ID')})`)
+    const lines = cart.map(i => `- ${i.name} x${i.qty} = ${fmtRp(i.price * i.qty)}`)
     const parts: string[] = [
       'Halo Rehat Coffeehouse!',
       '',
       'Saya mau pre-order:',
       ...lines,
       '',
-      `Total: Rp ${total.toLocaleString('id-ID')}`,
+      `Total: ${fmtRp(total)}`,
       '',
       `Nama: ${name.trim()}`,
     ]
@@ -81,9 +85,15 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
     return parts.join('\n')
   }, [name, notes, cart, total, cartIsEmpty])
 
-  const waUrl = waMessage ? `https://wa.me/${wa}?text=${encodeURIComponent(waMessage)}` : ''
-
+  const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
   const isWaBrowser = typeof navigator !== 'undefined' && /WhatsApp/i.test(navigator.userAgent)
+
+  const waUrl = useMemo(() => {
+    if (!waMessage) return ''
+    const encoded = encodeURIComponent(waMessage)
+    if (isMobile) return `whatsapp://send?phone=${wa}&text=${encoded}`
+    return `https://web.whatsapp.com/send?phone=${wa}&text=${encoded}`
+  }, [waMessage, wa, isMobile])
 
   const [copied, setCopied] = useState(false)
   function copyMessage() {
