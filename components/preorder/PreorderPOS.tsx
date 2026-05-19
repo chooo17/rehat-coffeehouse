@@ -198,7 +198,13 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
             disabled={!waUrl}
             onClick={() => {
               if (!waUrl) return
-              window.location.href = waUrl
+              const a = document.createElement('a')
+              a.href = waUrl
+              a.target = '_blank'
+              a.rel = 'noopener noreferrer'
+              document.body.appendChild(a)
+              a.click()
+              document.body.removeChild(a)
             }}
             className={`w-full py-4 text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 transition-colors ${
               waUrl
