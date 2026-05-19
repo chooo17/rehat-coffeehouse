@@ -1,4 +1,5 @@
 import { Hero } from '@/components/home/Hero'
+import { MarqueeStrip } from '@/components/home/MarqueeStrip'
 import { FeaturedMenu } from '@/components/home/FeaturedMenu'
 import { GallerySnippet } from '@/components/home/GallerySnippet'
 import { EventsPreview } from '@/components/home/EventsPreview'
@@ -17,6 +18,7 @@ export default async function HomePage() {
   return (
     <ScrollRevealWrapper>
       <Hero />
+      <MarqueeStrip />
       <FeaturedMenu items={menuItems} />
       <GallerySnippet photos={galleryPhotos} />
       <EventsPreview events={events} />
