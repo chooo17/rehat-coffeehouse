@@ -62,7 +62,9 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
     )
   }
 
-  const waUrl = useMemo(() => {
+  const wa = (waNumber || '6287777601617').replace(/\D/g, '')
+
+  const waMessage = useMemo(() => {
     if (!name.trim() || cartIsEmpty) return ''
     const lines = cart.map(i => `- ${i.name} x${i.qty} (Rp ${(i.price * i.qty).toLocaleString('id-ID')})`)
     const parts: string[] = [
@@ -76,10 +78,21 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
       `Nama: ${name.trim()}`,
     ]
     if (notes.trim()) parts.push(`Catatan: ${notes.trim()}`)
-    const msg = parts.join('\n')
-    const wa = (waNumber || '6287777601617').replace(/\D/g, '')
-    return `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`
-  }, [name, notes, cart, total, waNumber, cartIsEmpty])
+    return parts.join('\n')
+  }, [name, notes, cart, total, cartIsEmpty])
+
+  const waUrl = waMessage ? `https://wa.me/${wa}?text=${encodeURIComponent(waMessage)}` : ''
+
+  const isWaBrowser = typeof navigator !== 'undefined' && /WhatsApp/i.test(navigator.userAgent)
+
+  const [copied, setCopied] = useState(false)
+  function copyMessage() {
+    if (!waMessage) return
+    navigator.clipboard.writeText(waMessage).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2500)
+    })
+  }
 
   /* ── Cart Panel (reused on desktop sidebar + mobile sheet) ── */
   const CartPanel = (
@@ -203,7 +216,29 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
             />
           </div>
 
-          {waUrl ? (
+          {!waMessage ? (
+            <div className="w-full py-4 bg-brand-orange/30 text-white/50 text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 cursor-not-allowed select-none">
+              <WaIcon />
+              Isi nama terlebih dahulu
+            </div>
+          ) : isWaBrowser ? (
+            /* Fallback: in-app WA browser — tampilkan nomor + copy pesan */
+            <div className="space-y-3">
+              <p className="text-xs text-brand-black/60 leading-relaxed">
+                Buka WhatsApp secara langsung dan kirim pesan ke{' '}
+                <span className="font-bold text-brand-black">+{wa}</span>, atau salin pesan di bawah:
+              </p>
+              <div className="bg-white border-2 border-brand-black/10 p-4 text-xs text-brand-black/70 whitespace-pre-wrap font-mono leading-relaxed">
+                {waMessage}
+              </div>
+              <button
+                onClick={copyMessage}
+                className="w-full py-3 border-2 border-brand-black text-brand-black text-xs font-bold tracking-[4px] uppercase hover:bg-brand-black hover:text-brand-yellow transition-colors"
+              >
+                {copied ? 'Tersalin! ✓' : 'Salin Pesan'}
+              </button>
+            </div>
+          ) : (
             <a
               href={waUrl}
               target="_blank"
@@ -213,11 +248,6 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
               <WaIcon />
               Kirim via WhatsApp
             </a>
-          ) : (
-            <div className="w-full py-4 bg-brand-orange/30 text-white/50 text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 cursor-not-allowed select-none">
-              <WaIcon />
-              Isi nama terlebih dahulu
-            </div>
           )}
         </div>
       </div>
