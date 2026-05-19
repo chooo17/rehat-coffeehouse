@@ -150,8 +150,8 @@ export default async function HomePage() {
           <p className="text-[10px] font-bold tracking-[4px] uppercase text-white/70 mb-3">✦ Pesan Sebelum Datang</p>
           <h2 className="text-6xl md:text-8xl font-black italic uppercase text-white leading-none">PRE-ORDER.</h2>
         </div>
-        <div className="py-20 section-padding bg-brand-cream">
-          <div className="max-w-lg">
+        <div className="py-20 section-padding bg-brand-cream flex flex-col items-center">
+          <div className="w-full max-w-lg">
             <p className="text-sm text-brand-black/70 mb-10">Pilih menu yang ingin kamu pesan. Setelah submit, kami akan konfirmasi via WhatsApp.</p>
             <PreorderForm menuItems={menuItems} />
           </div>
@@ -166,8 +166,8 @@ export default async function HomePage() {
         </div>
         {settings ? (
           <>
-            <div className="py-20 section-padding bg-brand-cream">
-              <div className="grid md:grid-cols-2 gap-16 max-w-4xl">
+            <div className="py-20 section-padding bg-brand-cream flex flex-col items-center">
+              <div className="grid md:grid-cols-2 gap-16 w-full max-w-4xl">
                 <div className="reveal">
                   <h3 className="text-2xl font-black italic uppercase text-brand-black mb-8 flex items-center gap-3">
                     <span className="inline-block w-6 h-1 bg-brand-orange" />
@@ -220,18 +220,20 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="bg-brand-black py-16 section-padding reveal">
+            <div className="bg-brand-black py-16 section-padding reveal flex flex-col items-center">
+              <div className="w-full max-w-4xl">
               <h3 className="text-2xl font-black italic uppercase text-brand-yellow mb-8 flex items-center gap-3">
                 <span className="inline-block w-6 h-1 bg-brand-orange" />
                 Lokasi Kami
               </h3>
-              <div className="aspect-video w-full max-w-4xl border-2 border-brand-yellow/20 overflow-hidden">
+              <div className="aspect-video w-full border-2 border-brand-yellow/20 overflow-hidden">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0!2d107.6!3d-6.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRehat+Coffeehouse!5e0!3m2!1sid!2sid!4v1234567890"
                   width="100%" height="100%" style={{ border: 0 }}
                   allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
                   title="Lokasi Rehat Coffeehouse"
                 />
+              </div>
               </div>
             </div>
           </>

@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import gsap from 'gsap'
 
 export function Hero() {
@@ -88,15 +89,15 @@ export function Hero() {
       </div>
 
       {/* Right: image grid */}
-      <div ref={imgRef} className="relative z-10 grid grid-cols-2 gap-3 opacity-0">
-        <div className="row-span-2 rounded-xl bg-brand-black min-h-[220px] flex items-center justify-center text-5xl">
-          ☕
+      <div ref={imgRef} className="relative z-10 grid grid-cols-3 gap-3 opacity-0">
+        <div className="rounded-xl bg-brand-black aspect-square flex items-center justify-center p-5">
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
         </div>
-        <div className="rounded-xl bg-brand-orange min-h-[105px] flex items-center justify-center text-4xl">
-          🍰
+        <div className="rounded-xl bg-brand-orange aspect-square flex items-center justify-center p-5">
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
         </div>
-        <div className="rounded-xl bg-[#784ba0] min-h-[105px] flex items-center justify-center text-4xl">
-          🎵
+        <div className="rounded-xl bg-[#784ba0] aspect-square flex items-center justify-center p-5">
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
         </div>
       </div>
     </section>
