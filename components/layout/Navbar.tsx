@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -37,8 +38,8 @@ export function Navbar() {
     <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-brand-black transition-all duration-300 px-6 md:px-12 lg:px-24">
       <div className="flex items-center justify-between h-16">
         {/* Logo */}
-        <Link href="/" className="font-black italic text-brand-yellow text-xl tracking-tight">
-          Rehat!
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={48} className="h-10 w-auto brightness-0 invert" priority />
         </Link>
 
         {/* Desktop links */}

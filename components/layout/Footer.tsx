@@ -1,10 +1,13 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
 export function Footer() {
   return (
     <footer className="bg-brand-black border-t-[3px] border-brand-yellow px-6 md:px-12 lg:px-24 py-8">
       <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <span className="font-black italic text-brand-yellow text-xl tracking-tight">
-          Rehat!
-        </span>
+        <Link href="/">
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={100} height={40} className="h-8 w-auto brightness-0 invert" />
+        </Link>
         <p className="text-xs text-zinc-600 tracking-widest">
           © {new Date().getFullYear()} Rehat Coffeehouse · Malang
         </p>
