@@ -26,10 +26,10 @@ type Step = 'browse' | 'checkout'
 
 interface Props {
   menuItems: MenuItem[]
-  waNumber: string
+  waNumber?: string
 }
 
-export function PreorderPOS({ menuItems, waNumber }: Props) {
+export function PreorderPOS({ menuItems }: Props) {
   const [isOpen, setIsOpen]           = useState(false)
   const [cart, setCart]               = useState<CartItem[]>([])
   const [category, setCategory]       = useState('all')
