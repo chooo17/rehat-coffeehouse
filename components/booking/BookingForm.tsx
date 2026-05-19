@@ -38,7 +38,7 @@ export function BookingForm() {
       <Input label="Jumlah Tamu" aria-label="Jumlah Tamu" type="number" min={1} error={errors.guests?.message} {...register('guests', { valueAsNumber: true })} />
       <Input label="Catatan (opsional)" aria-label="Catatan" placeholder="Permintaan khusus..." {...register('notes')} />
       <button type="submit" disabled={isSubmitting}
-        className="px-8 py-4 bg-brand-accent text-brand-dark text-sm font-bold tracking-widest uppercase hover:bg-brand-mid hover:text-brand-light transition-colors disabled:opacity-50">
+        className="px-8 py-4 bg-brand-orange text-white text-sm font-bold tracking-widest uppercase hover:bg-orange-600 transition-colors disabled:opacity-50">
         {isSubmitting ? 'Mengirim...' : 'Booking Meja'}
       </button>
       {serverError && <p className="text-sm text-red-500 text-center">{serverError}</p>}

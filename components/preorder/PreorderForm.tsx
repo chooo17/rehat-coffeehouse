@@ -45,7 +45,7 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 max-w-lg">
       <div>
-        <h3 className="font-serif text-brand-dark text-xl mb-4">Pilih Menu</h3>
+        <h3 className="font-black italic uppercase text-brand-black text-xl mb-4">Pilih Menu</h3>
         <MenuSelector menuItems={menuItems} selected={selectedItems} onChange={handleItemsChange} />
         {errors.items && <p className="text-xs text-red-500 mt-2">{errors.items.message}</p>}
       </div>
@@ -55,22 +55,22 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
         <Input label="Catatan (opsional)" aria-label="Catatan" placeholder="Alergi, permintaan khusus..." {...register('notes')} />
       </div>
       {selectedItems.length > 0 && (
-        <div className="border border-brand-mid/30 p-4">
-          <p className="text-xs tracking-widest uppercase text-brand-mid mb-3">Ringkasan Pesanan</p>
+        <div className="border-2 border-brand-black/10 p-4 bg-white">
+          <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-3">Ringkasan Pesanan</p>
           {selectedItems.map(i => (
-            <div key={i.id} className="flex justify-between text-sm text-brand-dark py-1">
+            <div key={i.id} className="flex justify-between text-sm text-brand-black py-1">
               <span>{i.name} x{i.qty}</span>
               <span>Rp {(i.price * i.qty).toLocaleString('id-ID')}</span>
             </div>
           ))}
-          <div className="border-t border-brand-mid/30 mt-3 pt-3 flex justify-between font-semibold text-sm text-brand-dark">
+          <div className="border-t border-brand-black/10 mt-3 pt-3 flex justify-between font-black italic text-sm text-brand-black">
             <span>Total</span>
             <span>Rp {selectedItems.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString('id-ID')}</span>
           </div>
         </div>
       )}
       <button type="submit" disabled={isSubmitting}
-        className="px-8 py-4 bg-brand-accent text-brand-dark text-sm font-bold tracking-widest uppercase hover:bg-brand-mid hover:text-brand-light transition-colors disabled:opacity-50">
+        className="px-8 py-4 bg-brand-orange text-white text-sm font-bold tracking-widest uppercase hover:bg-orange-600 transition-colors disabled:opacity-50">
         {isSubmitting ? 'Mengirim...' : 'Konfirmasi Pre-order via WhatsApp'}
       </button>
       {serverError && <p className="text-sm text-red-500 text-center">{serverError}</p>}

@@ -15,7 +15,11 @@ export function CategoryFilter({ active, onChange }: { active: string; onChange:
         <button
           key={cat.value}
           onClick={() => onChange(cat.value)}
-          className={`px-5 py-2 text-xs tracking-widest uppercase border transition-colors ${active === cat.value ? 'bg-brand-dark text-brand-light border-brand-dark' : 'border-brand-mid text-brand-mid hover:border-brand-dark hover:text-brand-dark'}`}
+          className={`px-5 py-2 text-xs font-bold tracking-widest uppercase border-2 transition-colors ${
+            active === cat.value
+              ? 'bg-brand-black text-brand-yellow border-brand-black'
+              : 'border-brand-black/30 text-brand-black/60 hover:border-brand-black hover:text-brand-black'
+          }`}
         >
           {cat.label}
         </button>

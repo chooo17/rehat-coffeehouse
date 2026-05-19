@@ -9,9 +9,9 @@ export default async function MenuPage() {
   return (
     <ScrollRevealWrapper>
       <div className="pt-32 pb-24 section-padding">
-        <div className="text-center mb-16">
-          <p className="text-xs tracking-widest2 uppercase text-brand-accent mb-3">Apa yang Kami Sajikan</p>
-          <h1 className="text-5xl font-serif text-brand-dark">Menu</h1>
+        <div className="text-center mb-16 reveal">
+          <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-2">Apa yang Kami Sajikan</p>
+          <h1 className="text-5xl font-black italic uppercase text-brand-black leading-none">MENU</h1>
         </div>
         <MenuGrid items={items} />
       </div>
