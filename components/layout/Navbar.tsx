@@ -25,12 +25,12 @@ export function Navbar() {
   useEffect(() => {
     const nav = navRef.current
     if (!nav) return
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       start: 'top -80',
       onEnter:     () => nav.classList.add('shadow-md'),
       onLeaveBack: () => nav.classList.remove('shadow-md'),
     })
-    return () => ScrollTrigger.getAll().forEach(t => t.kill())
+    return () => trigger.kill()
   }, [])
 
   return (
