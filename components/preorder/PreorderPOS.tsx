@@ -55,18 +55,19 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
 
   const waUrl = useMemo(() => {
     if (!name.trim() || cartIsEmpty) return ''
-    const lines = cart.map(i => `• ${i.name} x${i.qty} — Rp ${(i.price * i.qty).toLocaleString('id-ID')}`)
-    const msg = [
-      'Halo Rehat Coffeehouse! 👋',
+    const lines = cart.map(i => `- ${i.name} x${i.qty} (Rp ${(i.price * i.qty).toLocaleString('id-ID')})`)
+    const parts: string[] = [
+      'Halo Rehat Coffeehouse!',
       '',
       'Saya mau pre-order:',
       ...lines,
       '',
-      `*Total: Rp ${total.toLocaleString('id-ID')}*`,
+      `Total: Rp ${total.toLocaleString('id-ID')}`,
       '',
       `Nama: ${name.trim()}`,
-      notes.trim() ? `Catatan: ${notes.trim()}` : '',
-    ].filter(Boolean).join('\n').trim()
+    ]
+    if (notes.trim()) parts.push(`Catatan: ${notes.trim()}`)
+    const msg = parts.join('\n')
     const wa = (waNumber || '6287777601617').replace(/\D/g, '')
     return `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`
   }, [name, notes, cart, total, waNumber, cartIsEmpty])
@@ -197,13 +198,7 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
             disabled={!waUrl}
             onClick={() => {
               if (!waUrl) return
-              const a = document.createElement('a')
-              a.href = waUrl
-              a.target = '_blank'
-              a.rel = 'noopener noreferrer'
-              document.body.appendChild(a)
-              a.click()
-              document.body.removeChild(a)
+              window.location.href = waUrl
             }}
             className={`w-full py-4 text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 transition-colors ${
               waUrl
