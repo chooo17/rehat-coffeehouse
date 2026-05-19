@@ -16,18 +16,19 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
   const [selectedItems, setSelectedItems] = useState<SelectedItem[]>([])
   const [serverError, setServerError] = useState<string | null>(null)
 
-  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<PreorderFormInput, unknown, PreorderInput>({
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm<PreorderFormInput, unknown, PreorderInput>({
     resolver: zodResolver(preorderSchema),
     defaultValues: { items: [] },
   })
 
+  const handleItemsChange = (items: SelectedItem[]) => {
+    setSelectedItems(items)
+    setValue('items', items, { shouldValidate: true })
+  }
+
   const onSubmit = async (data: PreorderInput) => {
     setServerError(null)
-    if (selectedItems.length === 0) {
-      setError('items', { message: 'Pilih minimal 1 item' })
-      return
-    }
-    const payload: PreorderInput = { ...data, items: selectedItems }
+    const payload: PreorderInput = { ...data, items: data.items }
     const res = await fetch('/api/preorder', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -45,7 +46,7 @@ export function PreorderForm({ menuItems }: { menuItems: MenuItem[] }) {
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 max-w-lg">
       <div>
         <h3 className="font-serif text-brand-dark text-xl mb-4">Pilih Menu</h3>
-        <MenuSelector menuItems={menuItems} selected={selectedItems} onChange={setSelectedItems} />
+        <MenuSelector menuItems={menuItems} selected={selectedItems} onChange={handleItemsChange} />
         {errors.items && <p className="text-xs text-red-500 mt-2">{errors.items.message}</p>}
       </div>
       <div className="flex flex-col gap-6">
