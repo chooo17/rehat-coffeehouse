@@ -5,26 +5,57 @@ import type { MenuItem } from '@/lib/sanity/types'
 
 export function FeaturedMenu({ items }: { items: MenuItem[] }) {
   return (
-    <section className="py-24 section-padding bg-brand-bg">
-      <div className="text-center mb-16 reveal">
-        <p className="text-xs tracking-widest2 uppercase text-brand-accent mb-3">Yang Terbaik dari Kami</p>
-        <h2 className="text-4xl font-serif text-brand-dark">Menu Pilihan</h2>
+    <section className="py-20 section-padding bg-[#f5f0e8] reveal">
+      <div className="mb-12">
+        <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-2 flex items-center gap-2">
+          <span className="inline-block w-5 h-0.5 bg-brand-orange" />
+          Menu Unggulan
+        </p>
+        <h2 className="text-[42px] font-black italic leading-none text-brand-black">
+          WHAT&apos;S<br />BREWING?
+        </h2>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {items.map(item => (
-          <div key={item._id} className="reveal group cursor-pointer">
-            <div className="aspect-square relative overflow-hidden bg-brand-mid/10 mb-3">
-              {item.image && (
-                <Image src={urlFor(item.image).width(400).url()} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div
+            key={item._id}
+            className="tilt-card bg-white rounded-xl overflow-hidden border-2 border-transparent cursor-pointer"
+          >
+            <div className="aspect-square relative overflow-hidden bg-orange-50">
+              {item.image ? (
+                <Image
+                  src={urlFor(item.image).width(400).url()}
+                  alt={item.name}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-5xl">☕</div>
               )}
             </div>
-            <p className="font-serif text-brand-dark">{item.name}</p>
-            <p className="text-sm text-brand-mid">Rp {item.price.toLocaleString('id-ID')}</p>
+            <div className="p-4">
+              <p className="text-[9px] font-bold tracking-[3px] uppercase text-brand-orange mb-1">
+                {item.category ?? 'Menu'}
+              </p>
+              <p className="font-black italic text-brand-black text-lg leading-tight mb-1">
+                {item.name}
+              </p>
+              <p className="text-sm font-bold text-brand-black">
+                Rp {item.price.toLocaleString('id-ID')}
+              </p>
+            </div>
           </div>
         ))}
       </div>
-      <div className="text-center mt-12 reveal">
-        <Link href="/menu" className="text-brand-accent tracking-widest uppercase text-sm hover:text-brand-mid transition-colors">Lihat Semua Menu →</Link>
+
+      <div className="mt-10">
+        <Link
+          href="/menu"
+          className="text-[11px] font-bold tracking-[3px] uppercase text-brand-black underline underline-offset-4 hover:text-brand-orange transition-colors"
+        >
+          Lihat Semua Menu →
+        </Link>
       </div>
     </section>
   )
