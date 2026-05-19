@@ -148,11 +148,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── PRE-ORDER ────────────────────────────── */}
+      {/* ── PESAN ONLINE ─────────────────────────── */}
       <section id="preorder" className="scroll-mt-[67px]">
         <div className="bg-brand-orange py-16 section-padding reveal">
           <p className="text-[10px] font-bold tracking-[4px] uppercase text-white/70 mb-3">✦ Pesan Sebelum Datang</p>
-          <h2 className="text-6xl md:text-8xl font-black italic uppercase text-white leading-none">PRE-ORDER.</h2>
+          <h2 className="text-6xl md:text-8xl font-black italic uppercase text-white leading-none">PESAN ONLINE.</h2>
         </div>
         <div className="py-20 section-padding bg-brand-cream">
           <PreorderPOS menuItems={menuItems} waNumber={settings?.waNumber ?? ''} />

@@ -1,6 +1,5 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import gsap from 'gsap'
@@ -103,13 +102,13 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Booking CTA — stays as separate page */}
-          <Link
-            href="/booking"
-            className="bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-2.5 hover:bg-orange-600 transition-colors"
+          <a
+            href="#preorder"
+            onClick={(e) => handleNavClick(e, 'preorder')}
+            className="bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-2.5 hover:bg-orange-600 transition-colors cursor-pointer"
           >
             Pesan
-          </Link>
+          </a>
 
           {/* Mobile hamburger */}
           <button
@@ -142,13 +141,13 @@ export function Navbar() {
               {isActive(link.id) && <span className="w-1.5 h-1.5 rounded-full bg-brand-yellow" />}
             </a>
           ))}
-          <Link
-            href="/booking"
-            onClick={() => setMobileOpen(false)}
-            className="mt-4 text-center bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-3 hover:bg-orange-600 transition-colors"
+          <a
+            href="#preorder"
+            onClick={(e) => handleNavClick(e, 'preorder')}
+            className="mt-4 text-center bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-3 hover:bg-orange-600 transition-colors cursor-pointer"
           >
             Pesan Sekarang
-          </Link>
+          </a>
         </div>
       )}
     </nav>

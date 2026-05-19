@@ -20,6 +20,7 @@ interface Props {
 }
 
 export function PreorderPOS({ menuItems, waNumber }: Props) {
+  const [isOpen, setIsOpen]           = useState(false)
   const [cart, setCart]               = useState<CartItem[]>([])
   const [category, setCategory]       = useState('all')
   const [step, setStep]               = useState<Step>('browse')
@@ -67,8 +68,9 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
       notes.trim() ? `Catatan: ${notes.trim()}` : '',
     ].filter(l => l !== undefined).join('\n').trim()
 
-    const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`
-    window.open(url, '_blank', 'noopener,noreferrer')
+    const wa = waNumber || '6287777601617'
+    const url = `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`
+    window.location.href = url
   }
 
   /* ── Cart Panel (reused on desktop sidebar + mobile sheet) ── */
@@ -205,6 +207,28 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
             Kirim via WhatsApp
           </button>
         </div>
+      </div>
+    )
+  }
+
+  /* ── Landing (menu belum dibuka) ── */
+  if (!isOpen) {
+    return (
+      <div className="flex flex-col items-center text-center py-10">
+        <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-4">✦ Pre-order via WhatsApp</p>
+        <h3 className="text-3xl md:text-5xl font-black italic uppercase text-brand-black leading-tight mb-6">
+          Pesan dulu,<br />baru datang.
+        </h3>
+        <p className="text-sm text-brand-black/60 max-w-sm mb-10 leading-relaxed">
+          Pilih menu favoritmu, isi nama, dan pesananmu langsung dikirim ke WhatsApp kami untuk dikonfirmasi.
+        </p>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="inline-flex items-center gap-3 px-10 py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase hover:bg-orange-600 transition-colors"
+        >
+          Pesan Sekarang
+          <span className="text-base leading-none">→</span>
+        </button>
       </div>
     )
   }
