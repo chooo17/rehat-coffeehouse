@@ -8,11 +8,14 @@ export default async function MenuPage() {
   const items = await getMenuItems()
   return (
     <ScrollRevealWrapper>
-      <div className="pt-32 pb-24 section-padding">
-        <div className="text-center mb-16 reveal">
-          <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-2">Apa yang Kami Sajikan</p>
-          <h1 className="text-5xl font-black italic uppercase text-brand-black leading-none">MENU</h1>
-        </div>
+      {/* Page hero band */}
+      <div className="bg-brand-yellow pt-28 pb-16 section-padding">
+        <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-black/50 mb-3">✦ Apa yang Kami Sajikan</p>
+        <h1 className="text-7xl md:text-9xl font-black italic uppercase text-brand-black leading-none">MENU.</h1>
+      </div>
+
+      {/* Content */}
+      <div className="py-20 section-padding bg-brand-cream">
         <MenuGrid items={items} />
       </div>
     </ScrollRevealWrapper>
