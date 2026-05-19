@@ -1,10 +1,10 @@
 import { Hero } from '@/components/home/Hero'
 import { MarqueeStrip } from '@/components/home/MarqueeStrip'
-import { MenuGrid } from '@/components/menu/MenuGrid'
+import { MenuSwiper } from '@/components/menu/MenuSwiper'
 import { MasonryGrid } from '@/components/gallery/MasonryGrid'
 import { EventCard } from '@/components/events/EventCard'
 import { PromoCard } from '@/components/events/PromoCard'
-import { PreorderForm } from '@/components/preorder/PreorderForm'
+import { PreorderPOS } from '@/components/preorder/PreorderPOS'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import Link from 'next/link'
 import {
@@ -19,6 +19,10 @@ import {
 export const revalidate = 60
 
 export default async function HomePage() {
+  function pickRandom<T>(arr: T[], n: number): T[] {
+    return [...arr].sort(() => Math.random() - 0.5).slice(0, n)
+  }
+
   const [menuItems, galleryPhotos, events, promos, about, settings] = await Promise.all([
     getMenuItems(),
     getGalleryPhotos(),
@@ -44,7 +48,7 @@ export default async function HomePage() {
           <h2 className="text-6xl md:text-8xl font-black italic uppercase text-brand-black leading-none">MENU.</h2>
         </div>
         <div className="py-20 section-padding bg-brand-cream">
-          <MenuGrid items={menuItems} />
+          <MenuSwiper items={pickRandom(menuItems, 8)} />
         </div>
       </section>
 
@@ -150,11 +154,8 @@ export default async function HomePage() {
           <p className="text-[10px] font-bold tracking-[4px] uppercase text-white/70 mb-3">✦ Pesan Sebelum Datang</p>
           <h2 className="text-6xl md:text-8xl font-black italic uppercase text-white leading-none">PRE-ORDER.</h2>
         </div>
-        <div className="py-20 section-padding bg-brand-cream flex flex-col items-center">
-          <div className="w-full max-w-lg">
-            <p className="text-sm text-brand-black/70 mb-10">Pilih menu yang ingin kamu pesan. Setelah submit, kami akan konfirmasi via WhatsApp.</p>
-            <PreorderForm menuItems={menuItems} />
-          </div>
+        <div className="py-20 section-padding bg-brand-cream">
+          <PreorderPOS menuItems={menuItems} waNumber={settings?.waNumber ?? ''} />
         </div>
       </section>
 
