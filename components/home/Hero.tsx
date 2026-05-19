@@ -80,7 +80,7 @@ export function Hero() {
           ref={eyebrowRef}
           className="inline-flex items-center gap-2 bg-brand-orange text-white text-[10px] font-bold tracking-[4px] uppercase px-3 py-1.5 rounded-sm mb-4 opacity-0"
         >
-          ✦ Specialty Coffee · Malang
+          ✦ Specialty Coffee · Sampang
         </div>
 
         <h1

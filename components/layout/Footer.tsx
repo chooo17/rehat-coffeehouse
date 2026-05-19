@@ -9,7 +9,7 @@ export function Footer() {
           <Image src="/logo.png" alt="Rehat Coffeehouse" width={100} height={40} className="h-8 w-auto brightness-0 invert" />
         </Link>
         <p className="text-xs text-zinc-600 tracking-widest">
-          © {new Date().getFullYear()} Rehat Coffeehouse · Malang
+          © {new Date().getFullYear()} Rehat Coffeehouse · Sampang
         </p>
         <div className="flex gap-6">
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-brand-yellow transition-colors tracking-widest uppercase">Instagram</a>
