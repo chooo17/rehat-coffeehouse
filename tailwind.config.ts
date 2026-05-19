@@ -11,6 +11,9 @@ const config: Config = {
           accent: '#D4956A',
           bg:     '#F5E6D3',
           light:  '#F5F2EC',
+          yellow: '#e8c84a',
+          orange: '#ff4d00',
+          black:  '#1a1a1a',
         },
       },
       fontFamily: {
