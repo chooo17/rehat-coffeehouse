@@ -12,7 +12,7 @@ export function Footer() {
           © {new Date().getFullYear()} Rehat Coffeehouse · Sampang
         </p>
         <div className="flex gap-6">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-brand-yellow transition-colors tracking-widest uppercase">Instagram</a>
+          <a href="https://instagram.com/rehat.in" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-brand-yellow transition-colors tracking-widest uppercase">Instagram</a>
           <a href="https://wa.me/6287777601617" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-brand-yellow transition-colors tracking-widest uppercase">WhatsApp</a>
           <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="text-xs text-zinc-500 hover:text-brand-yellow transition-colors tracking-widest uppercase">Maps</a>
         </div>

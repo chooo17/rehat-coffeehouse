@@ -86,7 +86,7 @@ export default async function KontakPage() {
         </h2>
         <div className="aspect-video w-full overflow-hidden max-w-4xl border-2 border-brand-yellow/20">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0!2d107.6!3d-6.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zRehat+Coffeehouse!5e0!3m2!1sid!2sid!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.409317801455!2d113.24830647604833!3d-7.194050170616652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7872aace8bae7%3A0x20b8d5524c71b159!2sRehat%20Coffeehouse!5e0!3m2!1sen!2sid!4v1779185770667!5m2!1sen!2sid"
             width="100%"
             height="100%"
             style={{ border: 0 }}
