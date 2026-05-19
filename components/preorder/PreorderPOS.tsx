@@ -231,33 +231,32 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
               <WaIcon />
               Isi nama terlebih dahulu
             </div>
-          ) : isWaBrowser ? (
-            /* Fallback: in-app WA browser — tampilkan nomor + copy pesan */
+          ) : (
             <div className="space-y-3">
-              <p className="text-xs text-brand-black/60 leading-relaxed">
-                Buka WhatsApp secara langsung dan kirim pesan ke{' '}
-                <span className="font-bold text-brand-black">+{wa}</span>, atau salin pesan di bawah:
-              </p>
-              <div className="bg-white border-2 border-brand-black/10 p-4 text-xs text-brand-black/70 whitespace-pre-wrap font-mono leading-relaxed">
-                {waMessage}
-              </div>
+              {/* Primary: native form GET — paling kompatibel di semua browser */}
+              <form
+                action={`https://wa.me/${wa}`}
+                method="get"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <input type="hidden" name="text" value={waMessage} />
+                <button
+                  type="submit"
+                  className="w-full py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
+                >
+                  <WaIcon />
+                  Kirim via WhatsApp
+                </button>
+              </form>
+              {/* Fallback: salin pesan */}
               <button
                 onClick={copyMessage}
-                className="w-full py-3 border-2 border-brand-black text-brand-black text-xs font-bold tracking-[4px] uppercase hover:bg-brand-black hover:text-brand-yellow transition-colors"
+                className="w-full py-3 border-2 border-brand-black/20 text-brand-black/50 text-xs font-bold tracking-[4px] uppercase hover:border-brand-black hover:text-brand-black transition-colors"
               >
-                {copied ? 'Tersalin! ✓' : 'Salin Pesan'}
+                {copied ? 'Tersalin! ✓' : 'Atau Salin Pesan'}
               </button>
             </div>
-          ) : (
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
-            >
-              <WaIcon />
-              Kirim via WhatsApp
-            </a>
           )}
         </div>
       </div>
