@@ -18,7 +18,7 @@ export const preorderItemSchema = z.object({
 
 export const preorderSchema = z.object({
   name:        z.string().min(1, 'Nama wajib diisi'),
-  arrivalTime: z.string().min(1, 'Jam kedatangan wajib diisi'),
+  arrivalTime: z.string().default(''),
   notes:       z.string().default(''),
   items:       z.array(preorderItemSchema).min(1, 'Pilih minimal 1 item'),
 })

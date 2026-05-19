@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react'
 import { POSMenuCard } from './POSMenuCard'
 import type { MenuItem } from '@/lib/sanity/types'
+import type { PreorderInput } from '@/lib/zod/schemas'
 
 function WaIcon() {
   return (
@@ -36,6 +37,8 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
   const [name, setName]               = useState('')
   const [notes, setNotes]             = useState('')
   const [mobileCartOpen, setMobileCartOpen] = useState(false)
+  const [submitting, setSubmitting]   = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const filtered = useMemo(
     () => category === 'all' ? menuItems : menuItems.filter(i => i.category === category),
@@ -62,46 +65,33 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
     )
   }
 
-  const wa = (waNumber || '6287777601617').replace(/\D/g, '')
-
-  function fmtRp(n: number) {
-    return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
-  }
-
-  const waMessage = useMemo(() => {
-    if (!name.trim() || cartIsEmpty) return ''
-    const lines = cart.map(i => `- ${i.name} x${i.qty} = ${fmtRp(i.price * i.qty)}`)
-    const parts: string[] = [
-      'Halo Rehat Coffeehouse!',
-      '',
-      'Saya mau pre-order:',
-      ...lines,
-      '',
-      `Total: ${fmtRp(total)}`,
-      '',
-      `Nama: ${name.trim()}`,
-    ]
-    if (notes.trim()) parts.push(`Catatan: ${notes.trim()}`)
-    return parts.join('\n')
-  }, [name, notes, cart, total, cartIsEmpty])
-
-  const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-  const isWaBrowser = typeof navigator !== 'undefined' && /WhatsApp/i.test(navigator.userAgent)
-
-  const waUrl = useMemo(() => {
-    if (!waMessage) return ''
-    const encoded = encodeURIComponent(waMessage)
-    if (isMobile) return `whatsapp://send?phone=${wa}&text=${encoded}`
-    return `https://web.whatsapp.com/send?phone=${wa}&text=${encoded}`
-  }, [waMessage, wa, isMobile])
-
-  const [copied, setCopied] = useState(false)
-  function copyMessage() {
-    if (!waMessage) return
-    navigator.clipboard.writeText(waMessage).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2500)
-    })
+  async function handleSend() {
+    if (!name.trim() || cartIsEmpty) return
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const payload: PreorderInput = {
+        name: name.trim(),
+        notes: notes.trim(),
+        arrivalTime: '',
+        items: cart.map(i => ({ id: i.id, name: i.name, qty: i.qty, price: i.price })),
+      }
+      const res = await fetch('/api/preorder', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (res.ok) {
+        const { waUrl } = await res.json()
+        window.location.assign(waUrl)
+      } else {
+        setSubmitError('Gagal mengirim. Coba lagi.')
+      }
+    } catch {
+      setSubmitError('Gagal mengirim. Periksa koneksi internet.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   /* ── Cart Panel (reused on desktop sidebar + mobile sheet) ── */
@@ -226,38 +216,15 @@ export function PreorderPOS({ menuItems, waNumber }: Props) {
             />
           </div>
 
-          {!waMessage ? (
-            <div className="w-full py-4 bg-brand-orange/30 text-white/50 text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 cursor-not-allowed select-none">
-              <WaIcon />
-              Isi nama terlebih dahulu
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {/* Primary: native form GET — paling kompatibel di semua browser */}
-              <form
-                action={`https://wa.me/${wa}`}
-                method="get"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <input type="hidden" name="text" value={waMessage} />
-                <button
-                  type="submit"
-                  className="w-full py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors"
-                >
-                  <WaIcon />
-                  Kirim via WhatsApp
-                </button>
-              </form>
-              {/* Fallback: salin pesan */}
-              <button
-                onClick={copyMessage}
-                className="w-full py-3 border-2 border-brand-black/20 text-brand-black/50 text-xs font-bold tracking-[4px] uppercase hover:border-brand-black hover:text-brand-black transition-colors"
-              >
-                {copied ? 'Tersalin! ✓' : 'Atau Salin Pesan'}
-              </button>
-            </div>
-          )}
+          <button
+            onClick={handleSend}
+            disabled={!name.trim() || submitting}
+            className="w-full py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase flex items-center justify-center gap-3 hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <WaIcon />
+            {submitting ? 'Mengirim...' : 'Kirim via WhatsApp'}
+          </button>
+          {submitError && <p className="text-xs text-red-500 text-center">{submitError}</p>}
         </div>
       </div>
     )
