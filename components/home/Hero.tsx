@@ -2,39 +2,101 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
-  const bgRef  = useRef<HTMLDivElement>(null)
-  const txtRef = useRef<HTMLDivElement>(null)
+  const eyebrowRef = useRef<HTMLDivElement>(null)
+  const titleRef   = useRef<HTMLHeadingElement>(null)
+  const descRef    = useRef<HTMLParagraphElement>(null)
+  const btnsRef    = useRef<HTMLDivElement>(null)
+  const imgRef     = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to(bgRef.current, {
-        yPercent: 30,
-        ease: 'none',
-        scrollTrigger: { trigger: bgRef.current, start: 'top top', end: 'bottom top', scrub: true },
-      })
-      gsap.from(txtRef.current!.children, {
-        opacity: 0, y: 60, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.3,
-      })
+      gsap.fromTo(eyebrowRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.2 }
+      )
+      gsap.fromTo(titleRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.4 }
+      )
+      gsap.fromTo(descRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 0.7, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.7 }
+      )
+      gsap.fromTo(btnsRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out', delay: 0.9 }
+      )
+      gsap.fromTo(imgRef.current,
+        { opacity: 0, scale: 0.88, rotation: 3 },
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.8, ease: 'back.out(1.7)', delay: 0.5 }
+      )
     })
     return () => ctx.revert()
   }, [])
 
   return (
-    <section className="relative h-screen overflow-hidden flex items-center justify-center">
-      <div ref={bgRef} className="absolute inset-0 bg-brand-dark bg-cover bg-center scale-110" style={{ backgroundImage: "url('/hero.jpg')" }} />
-      <div className="absolute inset-0 bg-brand-dark/60" />
-      <div ref={txtRef} className="relative z-10 text-center text-brand-light px-6">
-        <p className="text-xs tracking-widest2 uppercase text-brand-accent mb-4">Selamat Datang di</p>
-        <h1 className="text-5xl md:text-7xl font-serif tracking-widest mb-6">Rehat Coffeehouse</h1>
-        <p className="text-brand-light/70 max-w-md mx-auto mb-10">Tempat di mana setiap tegukan kopi adalah momen untuk beristirahat dari hiruk-pikuk.</p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <Link href="/menu" className="inline-flex items-center px-6 py-3 text-sm font-semibold tracking-widest uppercase bg-brand-accent text-brand-dark hover:bg-brand-mid hover:text-brand-light transition-all">Lihat Menu</Link>
-          <Link href="/booking" className="inline-flex items-center px-6 py-3 text-sm font-semibold tracking-widest uppercase border border-brand-light text-brand-light hover:bg-brand-light hover:text-brand-dark transition-all">Booking Meja</Link>
+    <section className="relative bg-brand-yellow overflow-hidden min-h-[500px] md:min-h-[540px] grid grid-cols-1 md:grid-cols-2 gap-8 items-center px-6 md:px-12 lg:px-24 py-16 md:py-0">
+      {/* Floating decoration */}
+      <span
+        aria-hidden="true"
+        className="absolute right-0 top-0 text-[260px] leading-none opacity-[0.07] select-none pointer-events-none animate-float"
+      >
+        ☕
+      </span>
+
+      {/* Left: text content */}
+      <div className="relative z-10">
+        <div
+          ref={eyebrowRef}
+          className="inline-flex items-center gap-2 bg-brand-orange text-white text-[10px] font-bold tracking-[4px] uppercase px-3 py-1.5 rounded-sm mb-4 opacity-0"
+        >
+          ✦ Specialty Coffee · Malang
+        </div>
+
+        <h1
+          ref={titleRef}
+          className="text-[56px] md:text-[72px] font-black italic leading-[0.9] text-brand-black mb-5 opacity-0"
+          style={{ fontFamily: 'system-ui, sans-serif' }}
+        >
+          GOOD<br />VIBES.<br />
+          <span className="text-brand-orange">GOOD<br />COFFEE.</span>
+        </h1>
+
+        <p
+          ref={descRef}
+          className="text-sm text-brand-black leading-relaxed max-w-xs mb-6 opacity-0"
+        >
+          Tempat terbaik untuk bersantai, bekerja, atau sekadar menikmati secangkir kopi terbaik bersama orang-orang tersayang.
+        </p>
+
+        <div ref={btnsRef} className="flex gap-3 items-center flex-wrap opacity-0">
+          <Link
+            href="/menu"
+            className="bg-brand-black text-brand-yellow text-[11px] font-bold tracking-[3px] uppercase px-7 py-3 hover:bg-zinc-800 transition-colors"
+          >
+            Lihat Menu
+          </Link>
+          <Link
+            href="/booking"
+            className="text-[11px] text-brand-black font-semibold tracking-[2px] uppercase underline underline-offset-4 hover:text-brand-orange transition-colors"
+          >
+            Booking Meja →
+          </Link>
+        </div>
+      </div>
+
+      {/* Right: image grid */}
+      <div ref={imgRef} className="relative z-10 grid grid-cols-2 gap-3 opacity-0">
+        <div className="row-span-2 rounded-xl bg-brand-black min-h-[220px] flex items-center justify-center text-5xl">
+          ☕
+        </div>
+        <div className="rounded-xl bg-brand-orange min-h-[105px] flex items-center justify-center text-4xl">
+          🍰
+        </div>
+        <div className="rounded-xl bg-[#784ba0] min-h-[105px] flex items-center justify-center text-4xl">
+          🎵
         </div>
       </div>
     </section>
