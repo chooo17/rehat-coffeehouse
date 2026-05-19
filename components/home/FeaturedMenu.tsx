@@ -5,7 +5,7 @@ import type { MenuItem } from '@/lib/sanity/types'
 
 export function FeaturedMenu({ items }: { items: MenuItem[] }) {
   return (
-    <section className="py-20 section-padding bg-[#f5f0e8] reveal">
+    <section className="py-20 section-padding bg-brand-cream reveal">
       <div className="mb-12">
         <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-2 flex items-center gap-2">
           <span className="inline-block w-5 h-0.5 bg-brand-orange" />
