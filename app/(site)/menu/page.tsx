@@ -1,8 +1,18 @@
+import type { Metadata } from 'next'
 import { MenuGrid } from '@/components/menu/MenuGrid'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import { getMenuItems } from '@/lib/sanity/queries'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Menu Lengkap',
+  description:
+    'Lihat menu lengkap Rehat Coffeehouse — kopi specialty, non-kopi, makanan, dan snack. Tersedia untuk dine-in dan pre-order via WhatsApp.',
+  alternates: {
+    canonical: 'https://rehat-coffeehouse.vercel.app/menu',
+  },
+}
 
 export default async function MenuPage() {
   const items = await getMenuItems()

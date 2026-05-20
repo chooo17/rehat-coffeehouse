@@ -1,9 +1,40 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  name: 'Rehat Coffeehouse',
+  description: 'Kedai kopi specialty di Sampang, Madura yang menyajikan kopi, makanan, dan minuman non-kopi.',
+  url: 'https://rehat-coffeehouse.vercel.app',
+  image: 'https://rehat-coffeehouse.vercel.app/og-image.png',
+  logo: 'https://rehat-coffeehouse.vercel.app/logo.png',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Sampang',
+    addressRegion: 'Jawa Timur',
+    addressCountry: 'ID',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -7.19405017,
+    longitude: 113.24830648,
+  },
+  hasMap: 'https://maps.app.goo.gl/rehatcoffeehouse',
+  servesCuisine: ['Kopi', 'Minuman', 'Makanan Ringan'],
+  priceRange: 'Rp 15.000 – Rp 50.000',
+  currenciesAccepted: 'IDR',
+  paymentAccepted: 'Cash, Transfer',
+  sameAs: [],
+}
+
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <main>{children}</main>
       <Footer />
