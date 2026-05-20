@@ -12,6 +12,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://rehat-coffeehouse.vercel.app/menu',
   },
+  openGraph: {
+    title: 'Menu Lengkap | Rehat Coffeehouse',
+    description: 'Kopi specialty, non-kopi, makanan, dan snack. Pre-order via WhatsApp.',
+    url: 'https://rehat-coffeehouse.vercel.app/menu',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Menu Rehat Coffeehouse' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Menu Lengkap | Rehat Coffeehouse',
+    images: ['/og-image.png'],
+  },
 }
 
 export default async function MenuPage() {
