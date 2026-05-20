@@ -27,15 +27,9 @@ function BaristaCard({
   index: number
 }) {
   const cfg = CARD_CONFIG[index % CARD_CONFIG.length]
-  const num = String(index + 1).padStart(2, '0')
 
   return (
     <div className={`group relative shrink-0 cursor-pointer mt-0 ${cfg.mdMt}`}>
-      {/* Outline number badge */}
-      <span className="barista-num absolute -top-6 -right-2 z-10 text-6xl font-black italic leading-none select-none">
-        {num}
-      </span>
-
       {/* Card */}
       <div
         className="relative w-44 md:w-52 aspect-[3/4] overflow-hidden border-[3px] border-brand-orange transition-all duration-300 ease-out"
@@ -84,13 +78,13 @@ export function BaristaSection({ team }: { team?: TeamMember[] }) {
   )
 
   return (
-    <section className="bg-brand-black overflow-hidden">
+    <section className="bg-brand-black overflow-x-clip">
       {/* Header */}
       <div className="pt-16 pb-12 section-padding reveal">
         <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-yellow/60 mb-3">
           ✦ Orang-orang di Balik Secangkir Kopi
         </p>
-        <h2 className="text-6xl md:text-8xl font-black italic uppercase text-brand-yellow leading-none">
+        <h2 className="text-5xl md:text-8xl font-black italic uppercase text-brand-yellow leading-none break-words">
           MARI BERKERABAT.
         </h2>
       </div>
@@ -103,9 +97,6 @@ export function BaristaSection({ team }: { team?: TeamMember[] }) {
           ) : (
             PLACEHOLDERS.map((cfg, i) => (
               <div key={i} className={`relative shrink-0 mt-0 ${cfg.mdMt}`}>
-                <span className="barista-num absolute -top-6 -right-2 z-10 text-6xl font-black italic leading-none select-none">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
                 <div
                   className="w-44 md:w-52 aspect-[3/4] border-[3px] border-brand-orange/30 flex items-center justify-center"
                   style={{ transform: `rotate(${cfg.rotate})` }}
