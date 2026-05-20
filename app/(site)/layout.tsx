@@ -22,13 +22,14 @@ const jsonLd = {
     latitude: -7.19405017,
     longitude: 113.24830648,
   },
-  hasMap: 'https://maps.google.com/?q=Rehat+Coffeehouse+Sampang+Madura',
+  hasMap: 'https://maps.app.goo.gl/EAowmmCTQy6H5YEt6',
   servesCuisine: ['Kopi', 'Minuman', 'Makanan Ringan'],
   priceRange: 'Rp 15.000 – Rp 50.000',
   currenciesAccepted: 'IDR',
   paymentAccepted: 'Cash, Transfer',
   sameAs: [
     'https://www.instagram.com/rehat.in',
+    'https://maps.app.goo.gl/EAowmmCTQy6H5YEt6',
   ],
 }
 
