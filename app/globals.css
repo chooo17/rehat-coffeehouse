@@ -45,6 +45,11 @@
     border-color: #1a1a1a;
   }
 
+  .barista-num {
+    color: transparent;
+    -webkit-text-stroke: 2px #ff4d00;
+  }
+
   .tilt-card-gallery {
     transition: transform 0.3s cubic-bezier(.25,.46,.45,.94),
                 box-shadow 0.3s ease;
