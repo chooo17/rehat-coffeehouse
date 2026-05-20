@@ -1,6 +1,6 @@
 import { Hero } from '@/components/home/Hero'
 import { MarqueeStrip } from '@/components/home/MarqueeStrip'
-import { MenuSwiper } from '@/components/menu/MenuSwiper'
+import { MenuMarquee } from '@/components/menu/MenuMarquee'
 import { MasonryGrid } from '@/components/gallery/MasonryGrid'
 import { EventCard } from '@/components/events/EventCard'
 import { PromoCard } from '@/components/events/PromoCard'
@@ -19,10 +19,6 @@ import {
 export const revalidate = 60
 
 export default async function HomePage() {
-  function pickRandom<T>(arr: T[], n: number): T[] {
-    return [...arr].sort(() => Math.random() - 0.5).slice(0, n)
-  }
-
   const [menuItems, galleryPhotos, events, promos, about, settings] = await Promise.all([
     getMenuItems(),
     getGalleryPhotos(),
@@ -48,7 +44,7 @@ export default async function HomePage() {
           <h2 className="text-6xl md:text-8xl font-black italic uppercase text-brand-black leading-none">MENU.</h2>
         </div>
         <div className="py-20 section-padding bg-brand-cream">
-          <MenuSwiper items={pickRandom(menuItems, 8)} />
+          <MenuMarquee items={menuItems} />
         </div>
       </section>
 
