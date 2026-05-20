@@ -27,7 +27,9 @@ const jsonLd = {
   priceRange: 'Rp 15.000 – Rp 50.000',
   currenciesAccepted: 'IDR',
   paymentAccepted: 'Cash, Transfer',
-  sameAs: [],
+  sameAs: [
+    'https://www.instagram.com/rehat.in',
+  ],
 }
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
