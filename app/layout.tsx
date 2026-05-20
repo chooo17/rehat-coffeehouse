@@ -35,9 +35,9 @@ export const metadata: Metadata = {
       'Kedai kopi specialty di Sampang, Madura. Menu kopi, non-kopi, dan makanan. Buka setiap hari.',
     images: [
       {
-        url: '/logo.png',
-        width: 512,
-        height: 512,
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
         alt: 'Rehat Coffeehouse Sampang',
       },
     ],
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Rehat Coffeehouse — Kopi & Makanan di Sampang, Madura',
     description: 'Kedai kopi specialty di Sampang, Madura.',
-    images: ['/logo.png'],
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,

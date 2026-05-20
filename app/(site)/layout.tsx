@@ -7,7 +7,7 @@ const jsonLd = {
   name: 'Rehat Coffeehouse',
   description: 'Kedai kopi specialty di Sampang, Madura yang menyajikan kopi, makanan, dan minuman non-kopi.',
   url: 'https://rehat-coffeehouse.vercel.app',
-  image: 'https://rehat-coffeehouse.vercel.app/logo.png',
+  image: 'https://rehat-coffeehouse.vercel.app/og-image.png',
   logo: 'https://rehat-coffeehouse.vercel.app/logo.png',
   address: {
     '@type': 'PostalAddress',
