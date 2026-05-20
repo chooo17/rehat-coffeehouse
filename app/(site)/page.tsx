@@ -38,6 +38,9 @@ export default async function HomePage() {
         <MarqueeStrip />
       </section>
 
+      {/* ── MARI BERKERABAT ──────────────────────── */}
+      <BaristaSection team={about?.team} />
+
       {/* ── TENTANG ──────────────────────────────── */}
       <section id="tentang" className="scroll-mt-[67px]">
         <div className="bg-brand-yellow py-16 section-padding reveal">
@@ -87,9 +90,6 @@ export default async function HomePage() {
           </div>
         )}
       </section>
-
-      {/* ── MARI BERKERABAT ──────────────────────── */}
-      <BaristaSection team={about?.team} />
 
       {/* ── MENU ─────────────────────────────────── */}
       <section id="menu" className="scroll-mt-[67px]">
