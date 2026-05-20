@@ -1,5 +1,6 @@
 import { Hero } from '@/components/home/Hero'
 import { MarqueeStrip } from '@/components/home/MarqueeStrip'
+import { BaristaSection } from '@/components/home/BaristaSection'
 import { MenuMarquee } from '@/components/menu/MenuMarquee'
 import { MasonryGrid } from '@/components/gallery/MasonryGrid'
 import { EventCard } from '@/components/events/EventCard'
@@ -36,6 +37,9 @@ export default async function HomePage() {
         <Hero />
         <MarqueeStrip />
       </section>
+
+      {/* ── BARISTA ──────────────────────────────── */}
+      <BaristaSection team={about?.team} />
 
       {/* ── MENU ─────────────────────────────────── */}
       <section id="menu" className="scroll-mt-[67px]">
