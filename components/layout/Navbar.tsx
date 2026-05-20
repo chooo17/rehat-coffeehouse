@@ -7,15 +7,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const SECTION_IDS = ['home', 'menu', 'tentang', 'galeri', 'events', 'preorder', 'kontak'] as const
+const SECTION_IDS = ['home', 'tentang', 'menu', 'galeri', 'preorder', 'events', 'kontak'] as const
 
 const navLinks = [
   { id: 'home',     label: 'Home' },
-  { id: 'menu',     label: 'Menu' },
   { id: 'tentang',  label: 'Tentang' },
+  { id: 'menu',     label: 'Menu' },
   { id: 'galeri',   label: 'Galeri' },
-  { id: 'events',   label: 'Events' },
   { id: 'preorder', label: 'Pesan' },
+  { id: 'events',   label: 'Events' },
   { id: 'kontak',   label: 'Kontak' },
 ]
 

@@ -38,20 +38,6 @@ export default async function HomePage() {
         <MarqueeStrip />
       </section>
 
-      {/* ── BARISTA ──────────────────────────────── */}
-      <BaristaSection team={about?.team} />
-
-      {/* ── MENU ─────────────────────────────────── */}
-      <section id="menu" className="scroll-mt-[67px]">
-        <div className="bg-brand-yellow py-16 section-padding reveal">
-          <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-black/50 mb-3">✦ Apa yang Kami Sajikan</p>
-          <h2 className="text-6xl md:text-8xl font-black italic uppercase text-brand-black leading-none">MENU.</h2>
-        </div>
-        <div className="py-20 section-padding bg-brand-cream">
-          <MenuMarquee items={menuItems} />
-        </div>
-      </section>
-
       {/* ── TENTANG ──────────────────────────────── */}
       <section id="tentang" className="scroll-mt-[67px]">
         <div className="bg-brand-yellow py-16 section-padding reveal">
@@ -102,6 +88,20 @@ export default async function HomePage() {
         )}
       </section>
 
+      {/* ── MARI BERKERABAT ──────────────────────── */}
+      <BaristaSection team={about?.team} />
+
+      {/* ── MENU ─────────────────────────────────── */}
+      <section id="menu" className="scroll-mt-[67px]">
+        <div className="bg-brand-yellow py-16 section-padding reveal">
+          <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-black/50 mb-3">✦ Apa yang Kami Sajikan</p>
+          <h2 className="text-6xl md:text-8xl font-black italic uppercase text-brand-black leading-none">MENU.</h2>
+        </div>
+        <div className="py-20 section-padding bg-brand-cream">
+          <MenuMarquee items={menuItems} />
+        </div>
+      </section>
+
       {/* ── GALERI ───────────────────────────────── */}
       <section id="galeri" className="scroll-mt-[67px]">
         <div className="bg-brand-black py-16 section-padding reveal">
@@ -110,6 +110,17 @@ export default async function HomePage() {
         </div>
         <div className="py-20 section-padding bg-brand-cream">
           <MasonryGrid photos={galleryPhotos} />
+        </div>
+      </section>
+
+      {/* ── PESAN ONLINE ─────────────────────────── */}
+      <section id="preorder" className="scroll-mt-[67px]">
+        <div className="bg-brand-orange py-16 section-padding reveal">
+          <p className="text-[10px] font-bold tracking-[4px] uppercase text-white/70 mb-3">✦ Pesan Sebelum Datang</p>
+          <h2 className="text-6xl md:text-8xl font-black italic uppercase text-white leading-none">PESAN ONLINE.</h2>
+        </div>
+        <div className="py-20 section-padding bg-brand-cream">
+          <PreorderPOS menuItems={menuItems} waNumber={settings?.waNumber ?? ''} />
         </div>
       </section>
 
@@ -145,17 +156,6 @@ export default async function HomePage() {
           {events.length === 0 && promos.length === 0 && (
             <p className="text-brand-black/60 py-10">Tidak ada event atau promo aktif saat ini.</p>
           )}
-        </div>
-      </section>
-
-      {/* ── PESAN ONLINE ─────────────────────────── */}
-      <section id="preorder" className="scroll-mt-[67px]">
-        <div className="bg-brand-orange py-16 section-padding reveal">
-          <p className="text-[10px] font-bold tracking-[4px] uppercase text-white/70 mb-3">✦ Pesan Sebelum Datang</p>
-          <h2 className="text-6xl md:text-8xl font-black italic uppercase text-white leading-none">PESAN ONLINE.</h2>
-        </div>
-        <div className="py-20 section-padding bg-brand-cream">
-          <PreorderPOS menuItems={menuItems} waNumber={settings?.waNumber ?? ''} />
         </div>
       </section>
 
@@ -223,18 +223,18 @@ export default async function HomePage() {
             </div>
             <div className="bg-brand-black py-16 section-padding reveal flex flex-col items-center">
               <div className="w-full max-w-4xl">
-              <h3 className="text-2xl font-black italic uppercase text-brand-yellow mb-8 flex items-center gap-3">
-                <span className="inline-block w-6 h-1 bg-brand-orange" />
-                Lokasi Kami
-              </h3>
-              <div className="aspect-video w-full border-2 border-brand-yellow/20 overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.409317801455!2d113.24830647604833!3d-7.194050170616652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7872aace8bae7%3A0x20b8d5524c71b159!2sRehat%20Coffeehouse!5e0!3m2!1sen!2sid!4v1779185770667!5m2!1sen!2sid"
-                  width="100%" height="100%" style={{ border: 0 }}
-                  allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                  title="Lokasi Rehat Coffeehouse"
-                />
-              </div>
+                <h3 className="text-2xl font-black italic uppercase text-brand-yellow mb-8 flex items-center gap-3">
+                  <span className="inline-block w-6 h-1 bg-brand-orange" />
+                  Lokasi Kami
+                </h3>
+                <div className="aspect-video w-full border-2 border-brand-yellow/20 overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.409317801455!2d113.24830647604833!3d-7.194050170616652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7872aace8bae7%3A0x20b8d5524c71b159!2sRehat%20Coffeehouse!5e0!3m2!1sen!2sid!4v1779185770667!5m2!1sen!2sid"
+                    width="100%" height="100%" style={{ border: 0 }}
+                    allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"
+                    title="Lokasi Rehat Coffeehouse"
+                  />
+                </div>
               </div>
             </div>
           </>
