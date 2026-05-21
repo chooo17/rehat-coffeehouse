@@ -28,7 +28,7 @@ const jsonLd = {
   currenciesAccepted: 'IDR',
   paymentAccepted: 'Cash, Transfer',
   sameAs: [
-    'https://www.instagram.com/rehat.in',
+    'https://www.instagram.com/rehat.coffeehouse',
     'https://maps.app.goo.gl/EAowmmCTQy6H5YEt6',
   ],
 }
