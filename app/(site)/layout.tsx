@@ -33,9 +33,21 @@ const jsonLd = {
   ],
 }
 
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Rehat Coffeehouse',
+  alternateName: 'Rehat Coffee',
+  url: 'https://rehat-coffeehouse.vercel.app',
+}
+
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
