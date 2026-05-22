@@ -2,6 +2,8 @@ import { Hero } from '@/components/home/Hero'
 import { MarqueeStrip } from '@/components/home/MarqueeStrip'
 import { BaristaSection } from '@/components/home/BaristaSection'
 import { TestimonialsSection } from '@/components/home/TestimonialsSection'
+import { FAQSection } from '@/components/home/FAQSection'
+import { InstagramSection } from '@/components/home/InstagramSection'
 import { MenuMarquee } from '@/components/menu/MenuMarquee'
 import { MasonryGrid } from '@/components/gallery/MasonryGrid'
 import { EventCard } from '@/components/events/EventCard'
@@ -9,6 +11,53 @@ import { PromoCard } from '@/components/events/PromoCard'
 import { PreorderPOS } from '@/components/preorder/PreorderPOS'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import Link from 'next/link'
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Jam buka Rehat Coffeehouse?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Rehat Coffeehouse buka setiap hari. Untuk jam operasional terbaru, cek halaman Kontak di website atau follow Instagram @rehat.coffeehouse.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Dimana lokasi Rehat Coffeehouse?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Kami berlokasi di Sampang, Madura, Jawa Timur. Lihat di Google Maps: https://maps.app.goo.gl/EAowmmCTQy6H5YEt6',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Bagaimana cara pre-order di Rehat Coffeehouse?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Pilih menu di halaman Pesan Online, isi nama dan catatan, lalu klik Kirim via WhatsApp. Pesananmu langsung terkirim dan kami konfirmasi segera.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Menu apa saja yang tersedia di Rehat Coffeehouse?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Kami menyajikan kopi specialty (espresso, manual brew, cold brew), minuman non-kopi (teh, cokelat, matcha), makanan, dan snack.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Apakah bisa reservasi atau booking tempat di Rehat Coffeehouse?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Ya, kamu bisa booking meja via halaman Booking di website kami. Kami akan konfirmasi ketersediaan via WhatsApp.',
+      },
+    },
+  ],
+}
 import {
   getMenuItems,
   getGalleryPhotos,
@@ -34,6 +83,10 @@ export default async function HomePage() {
 
   return (
     <ScrollRevealWrapper>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
 
       {/* ── HOME ─────────────────────────────────── */}
       <section id="home">
@@ -119,6 +172,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── INSTAGRAM ────────────────────────────── */}
+      <InstagramSection photos={galleryPhotos} />
+
       {/* ── PESAN ONLINE ─────────────────────────── */}
       <section id="preorder" className="scroll-mt-[67px]">
         <div className="bg-brand-orange py-16 section-padding reveal">
@@ -196,6 +252,9 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+
+      {/* ── FAQ ──────────────────────────────────── */}
+      <FAQSection />
 
       {/* ── KONTAK ───────────────────────────────── */}
       <section id="kontak" className="scroll-mt-[67px]">

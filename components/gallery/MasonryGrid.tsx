@@ -16,15 +16,21 @@ const CATEGORIES = [
 
 export function MasonryGrid({ photos }: { photos: GalleryPhoto[] }) {
   const [active, setActive] = useState('all')
+  const [fadeKey, setFadeKey] = useState(0)
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
   const filtered = active === 'all' ? photos : photos.filter(p => p.category === active)
+
+  function handleFilter(val: string) {
+    setActive(val)
+    setFadeKey(k => k + 1)
+  }
 
   return (
     <div>
       {/* Category filter */}
       <div className="flex flex-wrap gap-3 justify-center mb-8 md:mb-12">
         {CATEGORIES.map(cat => (
-          <button key={cat.value} onClick={() => setActive(cat.value)}
+          <button key={cat.value} onClick={() => handleFilter(cat.value)}
             className={`px-4 md:px-5 py-2 text-xs font-bold tracking-widest uppercase border-2 transition-colors ${active === cat.value ? 'bg-brand-black text-brand-yellow border-brand-black' : 'border-brand-black/30 text-brand-black/60 hover:border-brand-black hover:text-brand-black'}`}>
             {cat.label}
           </button>
@@ -33,12 +39,12 @@ export function MasonryGrid({ photos }: { photos: GalleryPhoto[] }) {
 
       {/* Mobile: horizontal swipe strip */}
       <div className="md:hidden -mx-6 overflow-x-auto scrollbar-hide">
-        <div className="flex gap-3 px-6 pb-4">
+        <div key={fadeKey} className="flex gap-3 px-6 pb-4 animate-fade-in">
           {filtered.map((photo, idx) => (
             <div
               key={photo._id}
               onClick={() => setLightboxIdx(idx)}
-              className="shrink-0 w-56 h-72 relative overflow-hidden cursor-pointer group"
+              className="shrink-0 w-56 h-72 relative overflow-hidden cursor-pointer group bg-brand-black/10"
             >
               <Image
                 src={urlFor(photo.image).width(400).url()}
@@ -60,9 +66,9 @@ export function MasonryGrid({ photos }: { photos: GalleryPhoto[] }) {
 
       {/* Desktop: masonry */}
       <div className="hidden md:block">
-        <Masonry breakpointCols={{ default: 3, 1024: 2 }} className="flex -ml-4 w-auto" columnClassName="pl-4">
+        <Masonry key={fadeKey} breakpointCols={{ default: 3, 1024: 2 }} className="flex -ml-4 w-auto animate-fade-in" columnClassName="pl-4">
           {filtered.map((photo, idx) => (
-            <div key={photo._id} onClick={() => setLightboxIdx(idx)} className="mb-4 cursor-pointer overflow-hidden group">
+            <div key={photo._id} onClick={() => setLightboxIdx(idx)} className="mb-4 cursor-pointer overflow-hidden group bg-brand-black/5">
               <Image
                 src={urlFor(photo.image).width(600).url()}
                 alt={photo.caption ?? 'Rehat Coffeehouse Sampang'}

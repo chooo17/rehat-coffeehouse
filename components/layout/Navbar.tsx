@@ -2,10 +2,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const SECTION_IDS = ['home', 'tentang', 'menu', 'galeri', 'preorder', 'events', 'kontak'] as const
 
@@ -30,12 +26,11 @@ export function Navbar() {
   useEffect(() => {
     const nav = navRef.current
     if (!nav) return
-    const trigger = ScrollTrigger.create({
-      start: 'top -80',
-      onEnter:     () => nav.classList.add('shadow-[0_4px_0_#e8c84a]'),
-      onLeaveBack: () => nav.classList.remove('shadow-[0_4px_0_#e8c84a]'),
-    })
-    return () => trigger.kill()
+    const onScroll = () => {
+      nav.classList.toggle('shadow-[0_4px_0_#e8c84a]', window.scrollY > 80)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   /* ── active section via scroll ────────────── */

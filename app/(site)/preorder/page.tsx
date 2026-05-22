@@ -1,8 +1,21 @@
+import type { Metadata } from 'next'
 import { PreorderForm } from '@/components/preorder/PreorderForm'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import { getMenuItems } from '@/lib/sanity/queries'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Pre-Order Menu',
+  description: 'Pesan menu Rehat Coffeehouse sebelum datang — pilih kopi, makanan, dan minuman favoritmu lalu konfirmasi via WhatsApp. Hemat waktu, langsung siap.',
+  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/preorder' },
+  openGraph: {
+    title: 'Pre-Order Menu | Rehat Coffeehouse',
+    description: 'Pesan menu Rehat Coffeehouse via WhatsApp sebelum datang.',
+    url: 'https://rehat-coffeehouse.vercel.app/preorder',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+}
 
 export default async function PreorderPage() {
   const menuItems = await getMenuItems()

@@ -19,7 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         serif: ['Georgia', 'Cambria', 'serif'],
-        sans:  ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        sans:  ['system-ui', 'ui-sans-serif', 'sans-serif'],
       },
       letterSpacing: {
         widest2: '0.3em',

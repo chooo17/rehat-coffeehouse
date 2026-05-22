@@ -34,6 +34,24 @@
   .animate-menu-scroll:hover { animation-play-state: paused; }
   .animate-float   { animation: float 6s ease-in-out infinite; }
 
+  /* Scroll reveal — driven by IntersectionObserver in ScrollRevealWrapper */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Gallery category-switch fade */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+
   .tilt-card {
     transition: transform 0.3s cubic-bezier(.25,.46,.45,.94),
                 box-shadow 0.3s ease,

@@ -1,5 +1,18 @@
+import type { Metadata } from 'next'
 import { BookingForm } from '@/components/booking/BookingForm'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
+
+export const metadata: Metadata = {
+  title: 'Reservasi / Booking',
+  description: 'Reservasi meja di Rehat Coffeehouse Sampang Madura. Isi form booking dan kami konfirmasi ketersediaan via WhatsApp.',
+  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/booking' },
+  openGraph: {
+    title: 'Reservasi | Rehat Coffeehouse',
+    description: 'Booking meja di Rehat Coffeehouse Sampang Madura via WhatsApp.',
+    url: 'https://rehat-coffeehouse.vercel.app/booking',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+}
 
 export default function BookingPage() {
   return (

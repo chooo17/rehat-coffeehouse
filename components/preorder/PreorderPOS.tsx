@@ -22,7 +22,7 @@ const CATEGORIES = [
 ]
 
 type CartItem = { id: string; name: string; price: number; qty: number }
-type Step = 'browse' | 'checkout'
+type Step = 'browse' | 'checkout' | 'success'
 
 interface Props {
   menuItems: MenuItem[]
@@ -39,6 +39,7 @@ export function PreorderPOS({ menuItems }: Props) {
   const [mobileCartOpen, setMobileCartOpen] = useState(false)
   const [submitting, setSubmitting]   = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const [waUrl, setWaUrl]             = useState('')
 
   const filtered = useMemo(
     () => category === 'all' ? menuItems : menuItems.filter(i => i.category === category),
@@ -82,12 +83,12 @@ export function PreorderPOS({ menuItems }: Props) {
         body: JSON.stringify(payload),
       })
       if (res.ok) {
-        const { waUrl } = await res.json()
+        const { waUrl: url } = await res.json()
+        setWaUrl(url)
         setCart([])
         setName('')
         setNotes('')
-        setStep('browse')
-        window.location.assign(waUrl)
+        setStep('success')
       } else {
         setSubmitError('Gagal mengirim. Coba lagi.')
       }
@@ -129,13 +130,15 @@ export function PreorderPOS({ menuItems }: Props) {
               <div className="flex items-center gap-2 shrink-0">
                 <button
                   onClick={() => changeQty(item.id, -1)}
+                  aria-label={`Kurangi ${item.name}`}
                   className="w-7 h-7 flex items-center justify-center border-2 border-brand-black/20 hover:border-brand-black text-brand-black font-bold text-xs transition-colors"
                 >
                   −
                 </button>
-                <span className="w-5 text-center text-sm font-black text-brand-black">{item.qty}</span>
+                <span className="w-5 text-center text-sm font-black text-brand-black" aria-label={`Jumlah: ${item.qty}`}>{item.qty}</span>
                 <button
                   onClick={() => changeQty(item.id, 1)}
+                  aria-label={`Tambah ${item.name}`}
                   className="w-7 h-7 flex items-center justify-center border-2 border-brand-black/20 hover:border-brand-black text-brand-black font-bold text-xs transition-colors"
                 >
                   +
@@ -162,6 +165,43 @@ export function PreorderPOS({ menuItems }: Props) {
       </div>
     </div>
   )
+
+  /* ── Success State ── */
+  if (step === 'success') {
+    return (
+      <div className="max-w-lg mx-auto text-center py-10">
+        <div className="w-16 h-16 bg-brand-orange mx-auto mb-6 flex items-center justify-center">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-3">✦ Pesanan Diterima</p>
+        <h3 className="text-3xl font-black italic uppercase text-brand-black mb-4 leading-tight">
+          Terima kasih!
+        </h3>
+        <p className="text-sm text-brand-black/60 leading-relaxed mb-8 max-w-sm mx-auto">
+          Pesananmu sudah kami terima. Klik tombol di bawah untuk membuka WhatsApp dan konfirmasi langsung dengan kami.
+        </p>
+        <a
+          href={waUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 px-10 py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase hover:bg-orange-600 transition-colors mb-4"
+        >
+          <WaIcon />
+          Buka WhatsApp
+        </a>
+        <div>
+          <button
+            onClick={() => { setStep('browse'); setWaUrl('') }}
+            className="text-[10px] font-bold tracking-widest uppercase text-brand-black/40 hover:text-brand-black transition-colors"
+          >
+            Pesan Lagi →
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   /* ── Checkout Form ── */
   if (step === 'checkout') {
@@ -330,6 +370,7 @@ export function PreorderPOS({ menuItems }: Props) {
           <div className="relative bg-white border-t-[3px] border-brand-yellow p-6 max-h-[80vh] flex flex-col">
             <button
               onClick={() => setMobileCartOpen(false)}
+              aria-label="Tutup keranjang"
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-brand-black/50 hover:text-brand-black font-bold text-xl"
             >
               ×

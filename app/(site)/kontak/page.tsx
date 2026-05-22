@@ -1,8 +1,21 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import { getSiteSettings } from '@/lib/sanity/queries'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Kontak & Lokasi',
+  description: 'Hubungi Rehat Coffeehouse via WhatsApp, lihat jam buka, dan temukan lokasi kami di Sampang, Madura. Kami siap melayanimu.',
+  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/kontak' },
+  openGraph: {
+    title: 'Kontak & Lokasi | Rehat Coffeehouse',
+    description: 'Alamat, jam buka, dan kontak Rehat Coffeehouse di Sampang Madura.',
+    url: 'https://rehat-coffeehouse.vercel.app/kontak',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+}
 
 export default async function KontakPage() {
   const settings = await getSiteSettings()

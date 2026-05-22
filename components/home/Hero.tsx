@@ -2,7 +2,6 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import gsap from 'gsap'
 
 export function Hero() {
   const eyebrowRef = useRef<HTMLDivElement>(null)
@@ -14,6 +13,8 @@ export function Hero() {
   const block3Ref  = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    let cleanup: (() => void) | undefined
+    import('gsap').then(({ default: gsap }) => {
     const ctx = gsap.context(() => {
       /* ── text entrance ─────────────────────────── */
       gsap.fromTo(eyebrowRef.current,
@@ -61,7 +62,9 @@ export function Hero() {
         duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 1.7,
       })
     })
-    return () => ctx.revert()
+      cleanup = () => ctx.revert()
+    })
+    return () => cleanup?.()
   }, [])
 
   return (
@@ -119,13 +122,13 @@ export function Hero() {
       {/* Right: image grid */}
       <div className="relative z-10 grid grid-cols-3 gap-3">
         <div ref={block1Ref} className="rounded-xl bg-brand-black aspect-square flex items-center justify-center p-5 opacity-0">
-          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" priority />
         </div>
         <div ref={block2Ref} className="rounded-xl bg-brand-orange aspect-square flex items-center justify-center p-5 opacity-0">
-          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" priority />
         </div>
         <div ref={block3Ref} className="rounded-xl bg-[#784ba0] aspect-square flex items-center justify-center p-5 opacity-0">
-          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" />
+          <Image src="/logo.png" alt="Rehat Coffeehouse" width={120} height={120} className="w-full h-auto brightness-0 invert" priority />
         </div>
       </div>
     </section>

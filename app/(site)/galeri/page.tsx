@@ -1,8 +1,21 @@
+import type { Metadata } from 'next'
 import { MasonryGrid } from '@/components/gallery/MasonryGrid'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import { getGalleryPhotos } from '@/lib/sanity/queries'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Galeri Foto',
+  description: 'Foto-foto suasana Rehat Coffeehouse Sampang Madura — interior, kopi specialty, makanan, dan momen spesial di kedai kami.',
+  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/galeri' },
+  openGraph: {
+    title: 'Galeri Foto | Rehat Coffeehouse',
+    description: 'Lihat foto suasana, kopi, dan makanan di Rehat Coffeehouse Sampang Madura.',
+    url: 'https://rehat-coffeehouse.vercel.app/galeri',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+}
 
 export default async function GaleriPage() {
   const photos = await getGalleryPhotos()

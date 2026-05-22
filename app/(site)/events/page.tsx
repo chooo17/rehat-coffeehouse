@@ -1,9 +1,22 @@
+import type { Metadata } from 'next'
 import { EventCard } from '@/components/events/EventCard'
 import { PromoCard } from '@/components/events/PromoCard'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import { getActiveEvents, getActivePromos } from '@/lib/sanity/queries'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Events & Promo',
+  description: 'Event mendatang dan promo terbaru di Rehat Coffeehouse Sampang Madura. Pantau terus untuk penawaran spesial dan agenda menarik.',
+  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/events' },
+  openGraph: {
+    title: 'Events & Promo | Rehat Coffeehouse',
+    description: 'Event dan promo terbaru di Rehat Coffeehouse Sampang Madura.',
+    url: 'https://rehat-coffeehouse.vercel.app/events',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+}
 
 export default async function EventsPage() {
   const [events, promos] = await Promise.all([getActiveEvents(), getActivePromos()])

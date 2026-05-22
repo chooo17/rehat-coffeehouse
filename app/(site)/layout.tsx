@@ -29,6 +29,13 @@ const jsonLd = {
   priceRange: 'Rp 15.000 – Rp 50.000',
   currenciesAccepted: 'IDR',
   paymentAccepted: 'Cash, Transfer',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '110',
+    bestRating: '5',
+    worstRating: '1',
+  },
   sameAs: [
     'https://www.instagram.com/rehat.coffeehouse',
     'https://maps.app.goo.gl/EAowmmCTQy6H5YEt6',
