@@ -1,6 +1,6 @@
 import { client } from './client'
 import type { QueryParams } from '@sanity/client'
-import type { MenuItem, GalleryPhoto, Event, Promo, AboutPage, SiteSettings } from './types'
+import type { MenuItem, GalleryPhoto, Event, Promo, AboutPage, SiteSettings, Testimonial } from './types'
 
 async function safeFetch<T>(query: string, params?: QueryParams): Promise<T> {
   try {
@@ -57,4 +57,10 @@ export async function getAboutPage(): Promise<AboutPage | null> {
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   return (await safeFetch<SiteSettings | null>(`*[_type == "siteSettings"][0]`)) ?? null
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  return (await safeFetch<Testimonial[]>(
+    `*[_type == "testimonial" && isActive == true] | order(_createdAt desc)`
+  )) ?? []
 }

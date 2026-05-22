@@ -1,6 +1,7 @@
 import { Hero } from '@/components/home/Hero'
 import { MarqueeStrip } from '@/components/home/MarqueeStrip'
 import { BaristaSection } from '@/components/home/BaristaSection'
+import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 import { MenuMarquee } from '@/components/menu/MenuMarquee'
 import { MasonryGrid } from '@/components/gallery/MasonryGrid'
 import { EventCard } from '@/components/events/EventCard'
@@ -15,18 +16,20 @@ import {
   getActivePromos,
   getAboutPage,
   getSiteSettings,
+  getTestimonials,
 } from '@/lib/sanity/queries'
 
 export const revalidate = 60
 
 export default async function HomePage() {
-  const [menuItems, galleryPhotos, events, promos, about, settings] = await Promise.all([
+  const [menuItems, galleryPhotos, events, promos, about, settings, testimonials] = await Promise.all([
     getMenuItems(),
     getGalleryPhotos(),
     getActiveEvents(),
     getActivePromos(),
     getAboutPage(),
     getSiteSettings(),
+    getTestimonials(),
   ])
 
   return (
@@ -40,6 +43,9 @@ export default async function HomePage() {
 
       {/* ── MARI BERKERABAT ──────────────────────── */}
       <BaristaSection team={about?.team} />
+
+      {/* ── ULASAN ───────────────────────────────── */}
+      <TestimonialsSection testimonials={testimonials} />
 
       {/* ── TENTANG ──────────────────────────────── */}
       <section id="tentang" className="scroll-mt-[67px]">

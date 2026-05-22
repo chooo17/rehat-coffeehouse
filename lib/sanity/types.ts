@@ -42,6 +42,14 @@ export interface AboutPage {
   team?: { name: string; role: string; photo?: SanityImageSource }[]
 }
 
+export interface Testimonial {
+  _id: string
+  name: string
+  rating: number
+  text: string
+  source: 'google' | 'instagram' | 'direct'
+}
+
 export interface SiteSettings {
   waNumber: string
   email: string
