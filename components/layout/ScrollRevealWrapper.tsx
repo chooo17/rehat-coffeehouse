@@ -7,6 +7,7 @@ export function ScrollRevealWrapper({ children }: { children: React.ReactNode })
   useEffect(() => {
     const container = ref.current
     if (!container) return
+    const el = container
 
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
@@ -21,8 +22,8 @@ export function ScrollRevealWrapper({ children }: { children: React.ReactNode })
     )
 
     function observeNew() {
-      container.querySelectorAll('.reveal:not(.reveal-visible)').forEach(el =>
-        intersectionObserver.observe(el)
+      el.querySelectorAll('.reveal:not(.reveal-visible)').forEach(item =>
+        intersectionObserver.observe(item)
       )
     }
 
@@ -30,7 +31,7 @@ export function ScrollRevealWrapper({ children }: { children: React.ReactNode })
 
     // Watch for new .reveal elements added during client-side navigation
     const mutationObserver = new MutationObserver(observeNew)
-    mutationObserver.observe(container, { childList: true, subtree: true })
+    mutationObserver.observe(el, { childList: true, subtree: true })
 
     return () => {
       intersectionObserver.disconnect()
