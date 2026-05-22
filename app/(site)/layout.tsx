@@ -9,9 +9,9 @@ const jsonLd = {
   '@type': 'CafeOrCoffeeShop',
   name: 'Rehat Coffeehouse',
   description: 'Kedai kopi specialty di Sampang, Madura yang menyajikan kopi, makanan, dan minuman non-kopi.',
-  url: 'https://rehat-coffeehouse.vercel.app',
-  image: 'https://rehat-coffeehouse.vercel.app/og-image.png',
-  logo: 'https://rehat-coffeehouse.vercel.app/logo.png',
+  url: 'https://rehat-coffeehouse.my.id',
+  image: 'https://rehat-coffeehouse.my.id/og-image.png',
+  logo: 'https://rehat-coffeehouse.my.id/logo.png',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Sampang',
@@ -33,7 +33,7 @@ const jsonLd = {
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.5',
-    reviewCount: '110',
+    reviewCount: '110', 
     bestRating: '5',
     worstRating: '1',
   },
@@ -48,7 +48,7 @@ const websiteLd = {
   '@type': 'WebSite',
   name: 'Rehat Coffeehouse',
   alternateName: 'Rehat Coffee',
-  url: 'https://rehat-coffeehouse.vercel.app',
+  url: 'https://rehat-coffeehouse.my.id',
 }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {

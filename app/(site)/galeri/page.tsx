@@ -8,11 +8,11 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: 'Galeri Foto',
   description: 'Foto-foto suasana Rehat Coffeehouse Sampang Madura — interior, kopi specialty, makanan, dan momen spesial di kedai kami.',
-  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/galeri' },
+  alternates: { canonical: 'https://rehat-coffeehouse.my.id/galeri' },
   openGraph: {
     title: 'Galeri Foto | Rehat Coffeehouse',
     description: 'Lihat foto suasana, kopi, dan makanan di Rehat Coffeehouse Sampang Madura.',
-    url: 'https://rehat-coffeehouse.vercel.app/galeri',
+    url: 'https://rehat-coffeehouse.my.id/galeri',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 }

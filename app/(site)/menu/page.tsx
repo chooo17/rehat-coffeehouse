@@ -18,12 +18,12 @@ export const metadata: Metadata = {
   description:
     'Lihat menu lengkap Rehat Coffeehouse — kopi specialty, non-kopi, makanan, dan snack. Tersedia untuk dine-in dan pre-order via WhatsApp.',
   alternates: {
-    canonical: 'https://rehat-coffeehouse.vercel.app/menu',
+    canonical: 'https://rehat-coffeehouse.my.id/menu',
   },
   openGraph: {
     title: 'Menu Lengkap | Rehat Coffeehouse',
     description: 'Kopi specialty, non-kopi, makanan, dan snack. Pre-order via WhatsApp.',
-    url: 'https://rehat-coffeehouse.vercel.app/menu',
+    url: 'https://rehat-coffeehouse.my.id/menu',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Menu Rehat Coffeehouse' }],
   },
   twitter: {

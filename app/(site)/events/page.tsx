@@ -9,11 +9,11 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: 'Events & Promo',
   description: 'Event mendatang dan promo terbaru di Rehat Coffeehouse Sampang Madura. Pantau terus untuk penawaran spesial dan agenda menarik.',
-  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/events' },
+  alternates: { canonical: 'https://rehat-coffeehouse.my.id/events' },
   openGraph: {
     title: 'Events & Promo | Rehat Coffeehouse',
     description: 'Event dan promo terbaru di Rehat Coffeehouse Sampang Madura.',
-    url: 'https://rehat-coffeehouse.vercel.app/events',
+    url: 'https://rehat-coffeehouse.my.id/events',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 }

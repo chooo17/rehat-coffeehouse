@@ -36,7 +36,7 @@ const CATEGORIES = {
 
 type CategorySlug = keyof typeof CATEGORIES
 
-const BASE_URL = 'https://rehat-coffeehouse.vercel.app'
+const BASE_URL = 'https://rehat-coffeehouse.my.id'
 
 export function generateStaticParams() {
   return Object.keys(CATEGORIES).map(category => ({ category }))

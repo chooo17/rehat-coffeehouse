@@ -3,7 +3,7 @@ import './globals.css'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { ServiceWorkerRegister } from '@/components/layout/ServiceWorkerRegister'
 
-const BASE_URL = 'https://rehat-coffeehouse.vercel.app'
+const BASE_URL = 'https://rehat-coffeehouse.my.id'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

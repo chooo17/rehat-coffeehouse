@@ -7,11 +7,11 @@ export const revalidate = 60
 export const metadata: Metadata = {
   title: 'Tentang Kami',
   description: 'Kisah dan filosofi di balik Rehat Coffeehouse — kedai kopi specialty di Sampang, Madura yang lahir dari kecintaan terhadap kopi dan ruang untuk bersantai.',
-  alternates: { canonical: 'https://rehat-coffeehouse.vercel.app/tentang' },
+  alternates: { canonical: 'https://rehat-coffeehouse.my.id/tentang' },
   openGraph: {
     title: 'Tentang Kami | Rehat Coffeehouse',
     description: 'Kisah dan filosofi di balik Rehat Coffeehouse, kedai kopi specialty di Sampang Madura.',
-    url: 'https://rehat-coffeehouse.vercel.app/tentang',
+    url: 'https://rehat-coffeehouse.my.id/tentang',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 }

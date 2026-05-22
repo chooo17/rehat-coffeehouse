@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE_URL = 'https://rehat-coffeehouse.vercel.app'
+const BASE_URL = 'https://rehat-coffeehouse.my.id'
 
 const MENU_CATEGORIES = ['coffee', 'non-coffee', 'food', 'snack']
 const LAST_MOD = new Date('2026-05-22')

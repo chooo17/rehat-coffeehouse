@@ -27,7 +27,7 @@ function MarqueeCard({ item }: { item: MenuItem }) {
 
   async function handleShare() {
     const shareText = `Cek menu *${item.name}* (Rp ${item.price.toLocaleString('id-ID')}) di Rehat Coffeehouse Sampang! ☕`
-    const shareUrl = 'https://rehat-coffeehouse.vercel.app/menu'
+    const shareUrl = 'https://rehat-coffeehouse.my.id/menu'
 
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
