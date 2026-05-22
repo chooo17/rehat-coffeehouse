@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     canonical: BASE_URL,
   },
   verification: {
-    google: 'k07jRq99Cg6quq4xENFnVXANa5pKYb7EV02dyhqjYLY',
+    google: 'E57w_lwy_od0uigpdbzIeDfeP8UmS_1LGDjgq9OxjG8',
   },
 }
 
