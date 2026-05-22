@@ -173,7 +173,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── INSTAGRAM ────────────────────────────── */}
-      <InstagramSection photos={galleryPhotos} />
+      <InstagramSection />
 
       {/* ── PESAN ONLINE ─────────────────────────── */}
       <section id="preorder" className="scroll-mt-[67px]">

@@ -1,6 +1,5 @@
-import Image from 'next/image'
-import { urlFor } from '@/lib/sanity/client'
-import type { GalleryPhoto } from '@/lib/sanity/types'
+'use client'
+import { useEffect } from 'react'
 
 function IgIcon() {
   return (
@@ -10,12 +9,14 @@ function IgIcon() {
   )
 }
 
-interface Props {
-  photos: GalleryPhoto[]
-}
-
-export function InstagramSection({ photos }: Props) {
-  const grid = photos.slice(0, 6)
+export function InstagramSection() {
+  useEffect(() => {
+    const s = document.createElement('script')
+    s.type = 'module'
+    s.src = 'https://w.behold.so/widget.js'
+    document.head.append(s)
+    return () => { if (document.head.contains(s)) document.head.removeChild(s) }
+  }, [])
 
   return (
     <section className="bg-brand-black py-20 section-padding">
@@ -40,39 +41,8 @@ export function InstagramSection({ photos }: Props) {
         </a>
       </div>
 
-      {/* Photo grid */}
-      {grid.length > 0 ? (
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-1.5 reveal">
-          {grid.map(photo => (
-            <a
-              key={photo._id}
-              href="https://instagram.com/rehat.coffeehouse"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative aspect-square overflow-hidden group bg-brand-black/40"
-              aria-label="Lihat di Instagram"
-            >
-              <Image
-                src={urlFor(photo.image).width(400).height(400).url()}
-                alt={photo.caption ?? 'Rehat Coffeehouse Instagram'}
-                fill
-                sizes="(max-width: 768px) 33vw, 16vw"
-                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-                {...(photo.lqip && { placeholder: 'blur' as const, blurDataURL: photo.lqip })}
-              />
-              <div className="absolute inset-0 bg-brand-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <IgIcon />
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <div className="reveal grid grid-cols-3 md:grid-cols-6 gap-1.5">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="aspect-square bg-brand-yellow/5 border border-brand-yellow/10" />
-          ))}
-        </div>
-      )}
+      {/* Behold feed */}
+      <div data-behold-id="jVWiPIveGT7fX6mVkQTh" />
     </section>
   )
 }
