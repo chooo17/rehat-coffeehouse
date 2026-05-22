@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { FloatingWA } from '@/components/layout/FloatingWA'
+import { CookieConsent } from '@/components/layout/CookieConsent'
 import { getSiteSettings } from '@/lib/sanity/queries'
 
 const jsonLd = {
@@ -66,6 +67,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <main>{children}</main>
       <Footer />
       <FloatingWA waNumber={settings?.waNumber ?? ''} />
+      <CookieConsent />
     </>
   )
 }

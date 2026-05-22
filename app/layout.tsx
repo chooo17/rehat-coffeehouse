@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
+import { ServiceWorkerRegister } from '@/components/layout/ServiceWorkerRegister'
 
 const BASE_URL = 'https://rehat-coffeehouse.vercel.app'
 
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <GoogleAnalytics />
+        <ServiceWorkerRegister />
       </body>
     </html>
   )
