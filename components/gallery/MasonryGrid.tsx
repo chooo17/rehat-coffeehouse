@@ -42,9 +42,11 @@ export function MasonryGrid({ photos }: { photos: GalleryPhoto[] }) {
             >
               <Image
                 src={urlFor(photo.image).width(400).url()}
-                alt={photo.caption ?? ''}
+                alt={photo.caption ?? 'Rehat Coffeehouse Sampang'}
                 fill
+                sizes="224px"
                 className="object-cover group-active:scale-105 transition-transform duration-300"
+                {...(photo.lqip && { placeholder: 'blur' as const, blurDataURL: photo.lqip })}
               />
               {photo.caption && (
                 <div className="absolute bottom-0 left-0 right-0 bg-brand-black/60 px-3 py-2">
@@ -61,7 +63,15 @@ export function MasonryGrid({ photos }: { photos: GalleryPhoto[] }) {
         <Masonry breakpointCols={{ default: 3, 1024: 2 }} className="flex -ml-4 w-auto" columnClassName="pl-4">
           {filtered.map((photo, idx) => (
             <div key={photo._id} onClick={() => setLightboxIdx(idx)} className="mb-4 cursor-pointer overflow-hidden group">
-              <Image src={urlFor(photo.image).width(600).url()} alt={photo.caption ?? ''} width={600} height={400} className="w-full h-auto group-hover:scale-105 transition-transform duration-500 object-cover" />
+              <Image
+                src={urlFor(photo.image).width(600).url()}
+                alt={photo.caption ?? 'Rehat Coffeehouse Sampang'}
+                width={600}
+                height={400}
+                sizes="(max-width: 1024px) 50vw, 33vw"
+                className="w-full h-auto group-hover:scale-105 transition-transform duration-500 object-cover"
+                {...(photo.lqip && { placeholder: 'blur' as const, blurDataURL: photo.lqip })}
+              />
             </div>
           ))}
         </Masonry>

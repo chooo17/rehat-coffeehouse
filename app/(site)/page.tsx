@@ -160,7 +160,39 @@ export default async function HomePage() {
             </div>
           )}
           {events.length === 0 && promos.length === 0 && (
-            <p className="text-brand-black/60 py-10">Tidak ada event atau promo aktif saat ini.</p>
+            <div className="reveal flex flex-col md:flex-row items-center gap-8 border-2 border-brand-black/10 p-10 bg-white">
+              <div className="flex-1">
+                <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-orange mb-3">✦ Coming Soon</p>
+                <h3 className="text-3xl font-black italic uppercase text-brand-black leading-tight mb-4">
+                  Event & Promo<br />Segera Hadir.
+                </h3>
+                <p className="text-sm text-brand-black/60 leading-relaxed max-w-sm">
+                  Pantau terus Instagram kami untuk info event, promo, dan kejutan terbaru dari Rehat Coffeehouse.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3 shrink-0">
+                <a
+                  href="https://instagram.com/rehat.coffeehouse"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-brand-black text-brand-yellow text-xs font-bold tracking-[4px] uppercase hover:bg-brand-yellow hover:text-brand-black transition-colors"
+                >
+                  Follow Instagram
+                  <span className="text-base leading-none">↗</span>
+                </a>
+                {settings?.waNumber && (
+                  <a
+                    href={`https://wa.me/${settings.waNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-8 py-4 border-2 border-brand-black text-brand-black text-xs font-bold tracking-[4px] uppercase hover:bg-brand-black hover:text-brand-yellow transition-colors"
+                  >
+                    Tanya via WhatsApp
+                    <span className="text-base leading-none">→</span>
+                  </a>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </section>

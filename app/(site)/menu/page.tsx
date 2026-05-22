@@ -1,7 +1,15 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { MenuGrid } from '@/components/menu/MenuGrid'
 import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
 import { getMenuItems } from '@/lib/sanity/queries'
+
+const CATEGORY_LINKS = [
+  { href: '/menu/coffee',     label: 'Coffee' },
+  { href: '/menu/non-coffee', label: 'Non-Coffee' },
+  { href: '/menu/food',       label: 'Makanan' },
+  { href: '/menu/snack',      label: 'Snack' },
+]
 
 export const revalidate = 60
 
@@ -33,6 +41,19 @@ export default async function MenuPage() {
       <div className="bg-brand-yellow pt-28 pb-16 section-padding">
         <p className="text-[10px] font-bold tracking-[4px] uppercase text-brand-black/50 mb-3">✦ Apa yang Kami Sajikan</p>
         <h1 className="text-7xl md:text-9xl font-black italic uppercase text-brand-black leading-none">MENU.</h1>
+      </div>
+
+      {/* Category quick-links (SEO + UX) */}
+      <div className="bg-brand-black section-padding py-4 flex gap-3 overflow-x-auto scrollbar-hide">
+        {CATEGORY_LINKS.map(link => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="shrink-0 px-5 py-2 text-xs font-bold tracking-widest uppercase border-2 border-white/20 text-white/50 hover:border-brand-yellow hover:text-brand-yellow transition-colors"
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
 
       {/* Content */}

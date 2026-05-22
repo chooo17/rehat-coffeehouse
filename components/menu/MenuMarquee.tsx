@@ -17,9 +17,11 @@ function MarqueeCard({ item }: { item: MenuItem }) {
         {item.image ? (
           <Image
             src={urlFor(item.image).width(300).url()}
-            alt={item.name}
+            alt={`${item.name} — Rehat Coffeehouse Sampang`}
             fill
+            sizes="176px"
             className="object-cover"
+            {...(item.lqip && { placeholder: 'blur' as const, blurDataURL: item.lqip })}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl select-none">

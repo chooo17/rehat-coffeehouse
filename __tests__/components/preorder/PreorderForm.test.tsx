@@ -26,7 +26,9 @@ describe('PreorderForm', () => {
 
   it('can add and remove items', async () => {
     render(<PreorderForm menuItems={mockItems} />)
-    fireEvent.click(screen.getByTestId('add-item-1'))
+    fireEvent.change(screen.getByDisplayValue('Pilih kategori...'), { target: { value: 'coffee' } })
+    fireEvent.change(screen.getByDisplayValue('Pilih menu...'), { target: { value: '1' } })
+    fireEvent.click(screen.getByText('+ Tambah'))
     expect(screen.getByTestId('qty-1')).toHaveTextContent('1')
     fireEvent.click(screen.getByTestId('remove-item-1'))
     expect(screen.queryByTestId('qty-1')).not.toBeInTheDocument()

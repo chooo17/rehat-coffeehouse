@@ -1,5 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { FloatingWA } from '@/components/layout/FloatingWA'
+import { getSiteSettings } from '@/lib/sanity/queries'
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -41,7 +43,8 @@ const websiteLd = {
   url: 'https://rehat-coffeehouse.vercel.app',
 }
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings()
   return (
     <>
       <script
@@ -55,6 +58,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <FloatingWA waNumber={settings?.waNumber ?? ''} />
     </>
   )
 }

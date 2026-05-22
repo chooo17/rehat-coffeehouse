@@ -8,6 +8,7 @@ export interface MenuItem {
   description?: string
   image: SanityImageSource
   isAvailable: boolean
+  lqip?: string
 }
 
 export interface GalleryPhoto {
@@ -15,6 +16,7 @@ export interface GalleryPhoto {
   image: SanityImageSource
   caption?: string
   category?: 'interior' | 'coffee' | 'food' | 'events'
+  lqip?: string
 }
 
 export interface Event {

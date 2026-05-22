@@ -35,9 +35,11 @@ export function POSMenuCard({ item, qty, onAdd }: Props) {
         {item.image ? (
           <Image
             src={urlFor(item.image).width(400).url()}
-            alt={item.name}
+            alt={`${item.name} — Rehat Coffeehouse Sampang`}
             fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
+            {...(item.lqip && { placeholder: 'blur' as const, blurDataURL: item.lqip })}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl select-none">

@@ -13,22 +13,32 @@ async function safeFetch<T>(query: string, params?: QueryParams): Promise<T> {
   }
 }
 
+const MENU_PROJECTION = `{ ..., "lqip": image.asset->metadata.lqip }`
+const GALLERY_PROJECTION = `{ ..., "lqip": image.asset->metadata.lqip }`
+
 export async function getMenuItems(): Promise<MenuItem[]> {
-  return (await safeFetch<MenuItem[]>(`*[_type == "menuItem" && isAvailable == true] | order(category asc, name asc)`)) ?? []
+  return (await safeFetch<MenuItem[]>(`*[_type == "menuItem" && isAvailable == true] | order(category asc, name asc) ${MENU_PROJECTION}`)) ?? []
+}
+
+export async function getMenuItemsByCategory(category: string): Promise<MenuItem[]> {
+  return (await safeFetch<MenuItem[]>(
+    `*[_type == "menuItem" && isAvailable == true && category == $category] | order(name asc) ${MENU_PROJECTION}`,
+    { category }
+  )) ?? []
 }
 
 export async function getFeaturedMenuItems(): Promise<MenuItem[]> {
   return (await safeFetch<MenuItem[]>(
-    `*[_type == "menuItem" && isAvailable == true] | order(_createdAt desc)[0...4]`
+    `*[_type == "menuItem" && isAvailable == true] | order(_createdAt desc)[0...4] ${MENU_PROJECTION}`
   )) ?? []
 }
 
 export async function getGalleryPhotos(): Promise<GalleryPhoto[]> {
-  return (await safeFetch<GalleryPhoto[]>(`*[_type == "galleryPhoto"] | order(_createdAt desc)`)) ?? []
+  return (await safeFetch<GalleryPhoto[]>(`*[_type == "galleryPhoto"] | order(_createdAt desc) ${GALLERY_PROJECTION}`)) ?? []
 }
 
 export async function getGallerySnippet(): Promise<GalleryPhoto[]> {
-  return (await safeFetch<GalleryPhoto[]>(`*[_type == "galleryPhoto"] | order(_createdAt desc)[0...3]`)) ?? []
+  return (await safeFetch<GalleryPhoto[]>(`*[_type == "galleryPhoto"] | order(_createdAt desc)[0...3] ${GALLERY_PROJECTION}`)) ?? []
 }
 
 export async function getActiveEvents(): Promise<Event[]> {

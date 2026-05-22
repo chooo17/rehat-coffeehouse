@@ -83,6 +83,10 @@ export function PreorderPOS({ menuItems }: Props) {
       })
       if (res.ok) {
         const { waUrl } = await res.json()
+        setCart([])
+        setName('')
+        setNotes('')
+        setStep('browse')
         window.location.assign(waUrl)
       } else {
         setSubmitError('Gagal mengirim. Coba lagi.')

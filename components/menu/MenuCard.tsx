@@ -7,7 +7,14 @@ export function MenuCard({ item }: { item: MenuItem }) {
     <div className="tilt-card group reveal bg-white border-2 border-transparent overflow-hidden cursor-pointer">
       <div className="aspect-square relative overflow-hidden bg-orange-50">
         {item.image ? (
-          <Image src={urlFor(item.image).width(500).url()} alt={item.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+          <Image
+            src={urlFor(item.image).width(500).url()}
+            alt={`${item.name} — Rehat Coffeehouse Sampang`}
+            fill
+            sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
+            {...(item.lqip && { placeholder: 'blur' as const, blurDataURL: item.lqip })}
+          />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-5xl">☕</div>
         )}

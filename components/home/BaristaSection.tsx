@@ -47,8 +47,9 @@ function BaristaCard({
       >
         <Image
           src={urlFor(member.photo).width(500).url()}
-          alt={member.name}
+          alt={`${member.name} — ${member.role} Rehat Coffeehouse`}
           fill
+          sizes="(max-width: 768px) 176px, 208px"
           className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
         />
         <div className="absolute bottom-0 left-0 right-0 bg-brand-yellow px-3 py-2.5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
