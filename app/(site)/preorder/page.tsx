@@ -17,14 +17,11 @@ export const metadata: Metadata = {
 const ORDER_APP_URL = process.env.NEXT_PUBLIC_ORDER_APP_URL
 
 export default function PreorderPage() {
-  // Navbar fixed setinggi 64px (h-16) → iframe mengisi sisa tinggi layar.
-  const frameHeight = 'calc(100dvh - 64px)'
-
   if (!ORDER_APP_URL) {
     return (
       <div
-        className="pt-16 flex items-center justify-center bg-brand-cream section-padding"
-        style={{ minHeight: frameHeight }}
+        className="flex items-center justify-center bg-brand-cream section-padding"
+        style={{ minHeight: '100dvh' }}
       >
         <p className="max-w-md text-center text-sm text-brand-black/70">
           Aplikasi pemesanan belum dikonfigurasi. Set variabel{' '}
@@ -36,14 +33,12 @@ export default function PreorderPage() {
   }
 
   return (
-    <div className="pt-16 bg-brand-cream">
-      <iframe
-        src={ORDER_APP_URL}
-        title="Pesan Rehat Coffeehouse"
-        className="block w-full border-0"
-        style={{ height: frameHeight }}
-        allow="clipboard-write; camera; payment; geolocation"
-      />
-    </div>
+    <iframe
+      src={ORDER_APP_URL}
+      title="Pesan Rehat Coffeehouse"
+      className="block w-full border-0"
+      style={{ height: '100dvh' }}
+      allow="clipboard-write; camera; payment; geolocation"
+    />
   )
 }

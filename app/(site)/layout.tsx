@@ -1,7 +1,4 @@
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { FloatingWA } from '@/components/layout/FloatingWA'
-import { CookieConsent } from '@/components/layout/CookieConsent'
+import { SiteChrome } from '@/components/layout/SiteChrome'
 import { getSiteSettings } from '@/lib/sanity/queries'
 
 const jsonLd = {
@@ -63,11 +60,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
-      <FloatingWA waNumber={settings?.waNumber ?? ''} />
-      <CookieConsent />
+      <SiteChrome waNumber={settings?.waNumber ?? ''}>{children}</SiteChrome>
     </>
   )
 }
