@@ -63,6 +63,11 @@ export function Hero() {
       })
     })
       cleanup = () => ctx.revert()
+    }).catch(() => {
+      // GSAP gagal load — pastikan konten tetap tampil tanpa animasi.
+      ;[eyebrowRef, titleRef, descRef, btnsRef, block1Ref, block2Ref, block3Ref].forEach(ref => {
+        ref.current?.style.setProperty('opacity', '1')
+      })
     })
     return () => cleanup?.()
   }, [])
