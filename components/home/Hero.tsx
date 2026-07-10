@@ -13,8 +13,16 @@ export function Hero() {
   const block3Ref  = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const allRefs = [eyebrowRef, titleRef, descRef, btnsRef, block1Ref, block2Ref, block3Ref]
+    const revealAll = () => allRefs.forEach(ref => ref.current?.style.setProperty('opacity', '1'))
+
+    // Safety net: kalau GSAP gagal load/jalan karena alasan apapun, paksa
+    // konten tetap tampil setelah 1.5s alih-alih nyangkut di opacity:0.
+    const safetyTimer = window.setTimeout(revealAll, 1500)
+
     let cleanup: (() => void) | undefined
     import('gsap').then(({ default: gsap }) => {
+    window.clearTimeout(safetyTimer)
     const ctx = gsap.context(() => {
       /* ── text entrance ─────────────────────────── */
       gsap.fromTo(eyebrowRef.current,
@@ -63,13 +71,11 @@ export function Hero() {
       })
     })
       cleanup = () => ctx.revert()
-    }).catch(() => {
-      // GSAP gagal load — pastikan konten tetap tampil tanpa animasi.
-      ;[eyebrowRef, titleRef, descRef, btnsRef, block1Ref, block2Ref, block3Ref].forEach(ref => {
-        ref.current?.style.setProperty('opacity', '1')
-      })
-    })
-    return () => cleanup?.()
+    }).catch(revealAll)
+    return () => {
+      window.clearTimeout(safetyTimer)
+      cleanup?.()
+    }
   }, [])
 
   return (
