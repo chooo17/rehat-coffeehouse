@@ -1,4 +1,5 @@
 import { SiteChrome } from '@/components/layout/SiteChrome'
+import { Footer } from '@/components/layout/Footer'
 import { getSiteSettings } from '@/lib/sanity/queries'
 
 const jsonLd = {
@@ -60,7 +61,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <SiteChrome waNumber={settings?.waNumber ?? ''}>{children}</SiteChrome>
+      <SiteChrome waNumber={settings?.waNumber ?? ''} footer={<Footer />}>{children}</SiteChrome>
     </>
   )
 }

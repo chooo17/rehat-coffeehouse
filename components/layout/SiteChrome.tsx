@@ -1,11 +1,10 @@
 'use client'
 import { usePathname } from 'next/navigation'
 import { Navbar } from './Navbar'
-import { Footer } from './Footer'
 import { FloatingWA } from './FloatingWA'
 import { CookieConsent } from './CookieConsent'
 
-export function SiteChrome({ children, waNumber }: { children: React.ReactNode; waNumber: string }) {
+export function SiteChrome({ children, footer, waNumber }: { children: React.ReactNode; footer: React.ReactNode; waNumber: string }) {
   const pathname = usePathname()
 
   if (pathname === '/preorder') {
@@ -16,7 +15,7 @@ export function SiteChrome({ children, waNumber }: { children: React.ReactNode; 
     <>
       <Navbar />
       <main>{children}</main>
-      <Footer />
+      {footer}
       <FloatingWA waNumber={waNumber} />
       <CookieConsent />
     </>
