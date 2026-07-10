@@ -4,6 +4,9 @@ import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { ServiceWorkerRegister } from '@/components/layout/ServiceWorkerRegister'
 
 const BASE_URL = 'https://rehat-coffeehouse.my.id'
+const ORDER_APP_ORIGIN = process.env.NEXT_PUBLIC_ORDER_APP_URL
+  ? new URL(process.env.NEXT_PUBLIC_ORDER_APP_URL).origin
+  : undefined
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -83,6 +86,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://cdn.sanity.io" />
+        {ORDER_APP_ORIGIN && (
+          <>
+            <link rel="preconnect" href={ORDER_APP_ORIGIN} />
+            <link rel="dns-prefetch" href={ORDER_APP_ORIGIN} />
+          </>
+        )}
       </head>
       <body>
         {children}

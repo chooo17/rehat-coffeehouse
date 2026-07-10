@@ -1,3 +1,4 @@
+import { PreorderFrame } from '@/components/preorder/PreorderFrame'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -32,13 +33,5 @@ export default function PreorderPage() {
     )
   }
 
-  return (
-    <iframe
-      src={ORDER_APP_URL}
-      title="Pesan Rehat Coffeehouse"
-      className="block w-full border-0"
-      style={{ height: '100dvh' }}
-      allow="clipboard-write; camera; payment; geolocation"
-    />
-  )
+  return <PreorderFrame src={ORDER_APP_URL} />
 }
