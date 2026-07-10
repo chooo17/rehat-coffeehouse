@@ -1,39 +1,49 @@
 import type { Metadata } from 'next'
-import { PreorderForm } from '@/components/preorder/PreorderForm'
-import { ScrollRevealWrapper } from '@/components/layout/ScrollRevealWrapper'
-import { getMenuItems } from '@/lib/sanity/queries'
-
-export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Pre-Order Menu',
-  description: 'Pesan menu Rehat Coffeehouse sebelum datang — pilih kopi, makanan, dan minuman favoritmu lalu konfirmasi via WhatsApp. Hemat waktu, langsung siap.',
+  description: 'Pesan menu Rehat Coffeehouse sebelum datang — pilih kopi, makanan, dan minuman favoritmu lalu konfirmasi. Hemat waktu, langsung siap.',
   alternates: { canonical: 'https://rehat-coffeehouse.my.id/preorder' },
   openGraph: {
     title: 'Pre-Order Menu | Rehat Coffeehouse',
-    description: 'Pesan menu Rehat Coffeehouse via WhatsApp sebelum datang.',
+    description: 'Pesan menu Rehat Coffeehouse sebelum datang.',
     url: 'https://rehat-coffeehouse.my.id/preorder',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
   },
 }
 
-export default async function PreorderPage() {
-  const menuItems = await getMenuItems()
-  return (
-    <ScrollRevealWrapper>
-      {/* Page hero band */}
-      <div className="bg-brand-orange pt-28 pb-16 section-padding">
-        <p className="text-[10px] font-bold tracking-[4px] uppercase text-white/70 mb-3">✦ Pesan Sebelum Datang</p>
-        <h1 className="text-7xl md:text-9xl font-black italic uppercase text-white leading-none">PRE-ORDER.</h1>
-      </div>
+// URL build web aplikasi Rehat (Flutter). Set di env:
+//   NEXT_PUBLIC_ORDER_APP_URL=https://order.rehat-coffeehouse.my.id
+const ORDER_APP_URL = process.env.NEXT_PUBLIC_ORDER_APP_URL
 
-      {/* Content */}
-      <div className="py-20 section-padding bg-brand-cream">
-        <div className="max-w-lg mx-auto">
-          <p className="text-sm text-brand-black/70 mb-10">Pilih menu yang ingin kamu pesan. Setelah submit, kami akan konfirmasi via WhatsApp.</p>
-          <PreorderForm menuItems={menuItems} />
-        </div>
+export default function PreorderPage() {
+  // Navbar fixed setinggi 64px (h-16) → iframe mengisi sisa tinggi layar.
+  const frameHeight = 'calc(100dvh - 64px)'
+
+  if (!ORDER_APP_URL) {
+    return (
+      <div
+        className="pt-16 flex items-center justify-center bg-brand-cream section-padding"
+        style={{ minHeight: frameHeight }}
+      >
+        <p className="max-w-md text-center text-sm text-brand-black/70">
+          Aplikasi pemesanan belum dikonfigurasi. Set variabel{' '}
+          <code className="font-mono">NEXT_PUBLIC_ORDER_APP_URL</code> ke URL
+          build web aplikasi Rehat, lalu deploy ulang.
+        </p>
       </div>
-    </ScrollRevealWrapper>
+    )
+  }
+
+  return (
+    <div className="pt-16 bg-brand-cream">
+      <iframe
+        src={ORDER_APP_URL}
+        title="Pesan Rehat Coffeehouse"
+        className="block w-full border-0"
+        style={{ height: frameHeight }}
+        allow="clipboard-write; camera; payment; geolocation"
+      />
+    </div>
   )
 }
