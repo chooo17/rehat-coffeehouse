@@ -57,6 +57,7 @@ export function Navbar() {
   /* ── nav click handler ────────────────────── */
   const handleNavClick = (e: React.MouseEvent, id: string) => {
     setMobileOpen(false)
+    if (id === 'preorder') return
     if (pathname === '/') {
       e.preventDefault()
       const el = document.getElementById(id)
@@ -66,7 +67,8 @@ export function Navbar() {
     }
   }
 
-  const isActive = (id: string) => pathname === '/' ? activeSection === id : false
+  const isActive = (id: string) =>
+    id === 'preorder' ? pathname === '/preorder' : pathname === '/' ? activeSection === id : false
 
   return (
     <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-brand-black border-b-[3px] border-brand-yellow transition-all duration-300 px-6 md:px-12 lg:px-24">
@@ -82,7 +84,7 @@ export function Navbar() {
           {navLinks.map(link => (
             <a
               key={link.id}
-              href={`#${link.id}`}
+              href={link.id === 'preorder' ? '/preorder' : `#${link.id}`}
               onClick={(e) => handleNavClick(e, link.id)}
               className={`relative text-[10px] font-bold tracking-[3px] uppercase transition-colors cursor-pointer ${
                 isActive(link.id) ? 'text-brand-yellow' : 'text-white/60 hover:text-white'
@@ -98,7 +100,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           <a
-            href="#preorder"
+            href="/preorder"
             onClick={(e) => handleNavClick(e, 'preorder')}
             className="bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-2.5 hover:bg-orange-600 transition-colors cursor-pointer"
           >
@@ -126,7 +128,7 @@ export function Navbar() {
           {navLinks.map(link => (
             <a
               key={link.id}
-              href={`#${link.id}`}
+              href={link.id === 'preorder' ? '/preorder' : `#${link.id}`}
               onClick={(e) => handleNavClick(e, link.id)}
               className={`text-[10px] font-bold tracking-[3px] uppercase px-2 py-3 border-b border-white/5 transition-colors flex items-center justify-between cursor-pointer ${
                 isActive(link.id) ? 'text-brand-yellow' : 'text-white/60 hover:text-white'
@@ -137,7 +139,7 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="#preorder"
+            href="/preorder"
             onClick={(e) => handleNavClick(e, 'preorder')}
             className="mt-4 text-center bg-brand-orange text-white text-[10px] font-black tracking-[3px] uppercase px-5 py-3 hover:bg-orange-600 transition-colors cursor-pointer"
           >

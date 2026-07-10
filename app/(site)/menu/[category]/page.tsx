@@ -153,7 +153,7 @@ export default async function CategoryMenuPage(
             ← Semua Menu
           </Link>
           <Link
-            href="/#preorder"
+            href="/preorder"
             className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-brand-orange text-white text-xs font-bold tracking-[4px] uppercase hover:bg-orange-600 transition-colors"
           >
             Pesan via WhatsApp →

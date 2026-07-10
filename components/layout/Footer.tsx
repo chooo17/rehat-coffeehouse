@@ -6,7 +6,7 @@ const NAV_LINKS = [
   { href: '/#tentang',  label: 'Tentang' },
   { href: '/#menu',     label: 'Menu' },
   { href: '/#galeri',   label: 'Galeri' },
-  { href: '/#preorder', label: 'Pesan Online' },
+  { href: '/preorder',  label: 'Pesan Online' },
   { href: '/#events',   label: 'Events' },
   { href: '/#kontak',   label: 'Kontak' },
   { href: '/menu',      label: 'Menu Lengkap' },
